@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { COMPANY } from "@/data/company";
+import { usdExact } from "@/lib/format-money";
 import { ACCOUNTS } from "@/data/customers";
 import {
   FY_2025_RECOGNIZED,
@@ -74,6 +77,13 @@ describe("Acme example ledger", () => {
     for (const row of actuals) {
       expect(row.conservative).toBe(row.base);
       expect(row.optimistic).toBe(row.base);
+    }
+  });
+
+  it("keeps the static financial overview on the same ledger", () => {
+    const html = readFileSync(resolve(process.cwd(), "demo/financial-overview.html"), "utf8");
+    for (const row of QUARTERS) {
+      expect(html).toContain(usdExact(row.recognized));
     }
   });
 

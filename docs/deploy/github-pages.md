@@ -15,6 +15,11 @@ URL after the first successful deploy:
 The workflow is `.github/workflows/pages.yml`. It uploads the `demo/`
 folder.
 
+If a Vercel project is pointed at the `gh-pages` branch (this demo’s
+existing deploy), `demo/package.json` + `demo/vercel.json` make that
+branch a **static** site. Do not let Vercel run `next build` there —
+`gh-pages` has no `src/app`. The Next.js app lives on `main`.
+
 A GitHub App token cannot flip that Settings switch. Someone with
 admin on the repo does it once.
 
