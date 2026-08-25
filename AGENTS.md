@@ -90,6 +90,9 @@ Full checklist: [docs/guides/add-document.md](docs/guides/add-document.md).
 | Edit | `src/` | `src/` | `demo/*.html` |
 
 If you change homepage / docs / admin layout, update `demo/` to match.
+`demo/deck.html` must stay byte-identical to
+`content/documents/sample-pitch-deck.html` (`src/__tests__/deck-theme.test.ts`).
+Deck geometry and the ten-slide spine: [docs/guides/deck.md](docs/guides/deck.md).
 
 ## Do not
 
