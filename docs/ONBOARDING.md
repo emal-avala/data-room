@@ -70,7 +70,7 @@ Do these before you invite a fund. Details: [guides/branding.md](guides/branding
 | Homepage / company / contact copy | `src/app/page.tsx`, `src/app/company/page.tsx`, `src/app/contact/page.tsx` |
 | Banner | `src/data/announcements.ts` |
 | NDA | `src/lib/nda-agreement.ts` — have counsel review |
-| Deck HTML | `content/documents/sample-pitch-deck.html` |
+| Deck HTML | `content/documents/sample-pitch-deck.html` — ten-slide theme, [deck.md](guides/deck.md) |
 | Static preview (GitHub Pages) | `demo/*.html` + `demo/styles.css` |
 
 Accent (`--primary`) is for buttons and the active nav only. Body text
@@ -150,8 +150,8 @@ Full page: [deploy/vercel-supabase.md](deploy/vercel-supabase.md).
 `demo/` is static HTML. Investors should use the Vercel app. Pages is
 the public walkthrough.
 
-1. Run the **Pages** workflow so the `gh-pages` branch exists.
-2. Repo **Settings → Pages → Source: Deploy from a branch** → `gh-pages` / `/`.
+1. Repo **Settings → Pages → Source: GitHub Actions**.
+2. Actions → **Pages** → Run workflow.
 3. Site: `https://<you>.github.io/data-room/`
 
 [deploy/github-pages.md](deploy/github-pages.md).
