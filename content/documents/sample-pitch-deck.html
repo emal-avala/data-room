@@ -1,68 +1,564 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Sample pitch deck</title>
-    <style>
-      :root {
-        --ink: #141821;
-        --muted: #676b73;
-        --paper: #ffffff;
-        --accent: #1d4ed8;
-      }
-      * { box-sizing: border-box; }
-      html, body { margin: 0; background: #111; color: var(--ink); font-family: "Source Sans 3", system-ui, sans-serif; }
-      .deck { width: 100%; max-width: 960px; margin: 0 auto; }
-      .slide {
-        background: var(--paper);
-        aspect-ratio: 16 / 9;
-        padding: 64px;
-        margin: 24px auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .eyebrow { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-      h1 { font-weight: 600; font-size: 42px; margin: 12px 0 0; letter-spacing: -0.03em; }
-      p { color: var(--muted); font-size: 18px; max-width: 36em; }
-      ul { margin: 0; padding-left: 1.2em; color: var(--ink); font-size: 18px; line-height: 1.6; }
-      @media print {
-        body { background: white; }
-        .slide { break-after: page; margin: 0; }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="deck">
-      <section class="slide">
-        <p class="eyebrow">Sample · Slide 1 of 5</p>
-        <h1>Your company name</h1>
-        <p>Replace this HTML file. It is a layout, not a pitch. No real figures ship in this repository.</p>
-      </section>
-      <section class="slide">
-        <p class="eyebrow">Problem</p>
-        <h1>Name the job the buyer cannot finish.</h1>
-        <p>Two sentences. A person, a constraint, a cost.</p>
-      </section>
-      <section class="slide">
-        <p class="eyebrow">Product</p>
-        <h1>What you ship today.</h1>
-        <ul>
-          <li>One capability in production</li>
-          <li>One proof a customer already accepted</li>
-          <li>One thing you will not build this year</li>
-        </ul>
-      </section>
-      <section class="slide">
-        <p class="eyebrow">Traction</p>
-        <h1>Leave the numbers out of Git.</h1>
-        <p>Put figures in a private <code>src/data/</code> module after you fork. This skeleton keeps the slide empty so a public clone cannot leak a book.</p>
-      </section>
-      <section class="slide">
-        <p class="eyebrow">The round</p>
-        <h1>Keep the ask for the conversation.</h1>
-        <p>The use-of-funds memo is the place that models a plan size. This slide does not.</p>
-      </section>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acme Corporation · Series A</title>
+<!--
+  Self-contained 10-slide deck. No build. Change ACCENT and the company
+  strings; keep geometry and the spine. See docs/guides/deck.md.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101010; --paper:#FFFFFF; --accent:#1D4ED8;
+  --paper-warm:#F0EEE9; --inkmuted:#746F65; --inkline:rgba(16,16,16,.16);
+  --line:rgba(255,255,255,.14); --line2:rgba(255,255,255,.28); --dim:rgba(255,255,255,.62);
+  --gray03:#E8EEF7;
+  --type-display:64px; --type-title:48px; --type-subtitle:30px; --type-body:24px; --type-small:18px; --type-micro:14px;
+  --pad-x:96px; --pad-top:80px; --pad-bottom:72px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --r-card:14px; --r-el:8px;
+  --chrome-bg:#101010; --chrome-rail:#0A0A0A; --chrome-fg:#FFFFFF; --chrome-dim:rgba(255,255,255,.62); --chrome-line:rgba(255,255,255,.14);
+  --face:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
+}
+html,body{margin:0;padding:0;background:#000;font-family:var(--face);-webkit-font-smoothing:antialiased;overflow:hidden;}
+*{box-sizing:border-box;}
+#deck-stage h1,#deck-stage h2{font-weight:300;}
+[data-slide][data-chapter]::before{
+  content:attr(data-chapter);
+  position:absolute;top:28px;left:var(--pad-x);z-index:12;
+  font:500 12px/1 var(--face);letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);pointer-events:none;
+}
+[data-slide][data-theme="light"][data-chapter]::before{color:rgba(16,16,16,.46);}
+[data-label="Title"]::before,[data-label="Close"]::before{display:none;}
+[data-anim]{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
+[data-slide][data-active] [data-anim]{opacity:1;transform:none;}
+[data-slide][data-active] [data-anim]:nth-child(2){transition-delay:.06s;}
+[data-slide][data-active] [data-anim]:nth-child(3){transition-delay:.12s;}
+[data-slide][data-active] [data-anim]:nth-child(4){transition-delay:.18s;}
+[data-grow]{height:0 !important;transition:height .8s var(--ease);}
+[data-slide][data-active] [data-grow]{height:var(--h) !important;}
+[data-story-map] button{font:500 13px/1.2 var(--face);}
+[data-story-map] button:hover,[data-story-map] button:focus-visible{color:#fff;border-color:#fff !important;outline:0;}
+a{color:var(--accent);text-decoration:none;}
+::selection{background:var(--accent);color:#fff;}
+#deck-rail button[data-active] > div:first-child{outline:2px solid var(--accent);outline-offset:2px;}
+#deck-overview button[data-active]{outline:2px solid var(--accent);outline-offset:3px;}
+@media (prefers-reduced-motion:reduce){
+  [data-anim]{opacity:1 !important;transform:none !important;transition:none !important;}
+  [data-grow]{height:var(--h) !important;transition:none !important;}
+}
+@media print{
+  html,body{overflow:visible !important;background:#fff !important;height:auto !important;}
+  #deck-root,#deck-viewport,#deck-stage{position:static !important;transform:none !important;width:auto !important;height:auto !important;}
+  #deck-rail,#deck-overview,footer[data-chrome]{display:none !important;}
+  [data-slide]{
+    position:relative !important;inset:auto !important;opacity:1 !important;transform:none !important;
+    page-break-after:always;break-after:page;width:1920px !important;height:1080px !important;
+  }
+  [data-slide]:last-of-type{page-break-after:auto;}
+  [data-anim]{opacity:1 !important;transform:none !important;}
+  [data-grow]{height:var(--h) !important;}
+  @page{size:1920px 1080px;margin:0;}
+}
+</style>
+</head>
+<body>
+<script>var ACCENT='#1D4ED8';</script>
+<div id="deck-root" style="position:fixed;inset:0;display:flex;flex-direction:column;background:#000;color:#fff;font-family:var(--face);">
+  <div style="flex:1;display:flex;min-height:0;position:relative;">
+    <aside id="deck-rail" data-chrome="rail" style="width:236px;flex:0 0 236px;background:#0A0A0A;border-right:1px solid var(--chrome-line);overflow:auto;padding:14px;display:none;flex-direction:column;gap:12px;z-index:30;"></aside>
+    <main id="deck-viewport" style="flex:1;min-width:0;position:relative;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;">
+      <div id="deck-stage" style="position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:top left;">
+
+        <!-- 01 Title -->
+        <section data-slide data-label="Title" data-screen-label="01" data-chapter="Series A" style="position:absolute;inset:0;width:1920px;height:1080px;background:#101010;color:#fff;padding:0;display:grid;grid-template-columns:768px 1fr;overflow:hidden;">
+          <div style="position:relative;background:var(--accent);color:#fff;padding:75px;">
+            <div data-anim style="font-size:14px;letter-spacing:.18em;text-transform:uppercase;">Acme Corporation</div>
+            <h1 data-anim style="position:absolute;left:75px;right:60px;top:235px;margin:0;font-size:84px;line-height:.98;letter-spacing:-.022em;">Autonomous yard operations for the modern distribution center.</h1>
+            <nav data-anim data-story-map aria-label="Deck chapters" style="position:absolute;left:75px;right:60px;bottom:74px;display:flex;flex-direction:column;gap:18px;">
+              <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);">The story</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px 22px;">
+                <button type="button" data-story-target="2" style="padding:11px 0 0;background:transparent;border:0;border-top:1px solid rgba(255,255,255,.45);color:rgba(255,255,255,.88);text-align:left;cursor:pointer;"><span style="opacity:.68;margin-right:7px;">01</span>The job</button>
+                <button type="button" data-story-target="3" style="padding:11px 0 0;background:transparent;border:0;border-top:1px solid rgba(255,255,255,.45);color:rgba(255,255,255,.88);text-align:left;cursor:pointer;"><span style="opacity:.68;margin-right:7px;">02</span>Why now</button>
+                <button type="button" data-story-target="4" style="padding:11px 0 0;background:transparent;border:0;border-top:1px solid rgba(255,255,255,.45);color:rgba(255,255,255,.88);text-align:left;cursor:pointer;"><span style="opacity:.68;margin-right:7px;">03</span>Product</button>
+                <button type="button" data-story-target="5" style="padding:11px 0 0;background:transparent;border:0;border-top:1px solid rgba(255,255,255,.45);color:rgba(255,255,255,.88);text-align:left;cursor:pointer;"><span style="opacity:.68;margin-right:7px;">04</span>Proof</button>
+                <button type="button" data-story-target="7" style="padding:11px 0 0;background:transparent;border:0;border-top:1px solid rgba(255,255,255,.45);color:rgba(255,255,255,.88);text-align:left;cursor:pointer;"><span style="opacity:.68;margin-right:7px;">05</span>Why we win</button>
+                <button type="button" data-story-target="9" style="padding:11px 0 0;background:transparent;border:0;border-top:1px solid rgba(255,255,255,.45);color:rgba(255,255,255,.88);text-align:left;cursor:pointer;"><span style="opacity:.68;margin-right:7px;">06</span>The round</button>
+              </div>
+            </nav>
+            <div data-anim style="position:absolute;right:75px;top:84px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;">Series A · June 2026</div>
+          </div>
+          <div style="position:relative;background:#070B14;overflow:hidden;">
+            <svg viewBox="0 0 1152 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;">
+              <rect width="1152" height="1080" fill="#070B14"/>
+              <g fill="none" stroke="#1D4ED8" stroke-opacity=".35" stroke-width="2">
+                <rect x="80" y="120" width="990" height="840" rx="8"/>
+                <rect x="120" y="180" width="220" height="720"/>
+                <path d="M380 180 V900 M380 360 H1070 M380 540 H1070 M380 720 H1070"/>
+                <circle cx="720" cy="450" r="28"/>
+                <circle cx="860" cy="630" r="28"/>
+                <path d="M720 450 L860 630"/>
+              </g>
+              <g fill="#1D4ED8">
+                <rect x="140" y="220" width="180" height="36" opacity=".85"/>
+                <rect x="140" y="280" width="180" height="36" opacity=".55"/>
+                <rect x="140" y="340" width="180" height="36" opacity=".35"/>
+              </g>
+              <text x="140" y="980" fill="rgba(255,255,255,.45)" font-size="18" font-family="Source Sans 3,sans-serif" letter-spacing="3">GATE → DOCK · INSIDE THE FENCE</text>
+            </svg>
+          </div>
+        </section>
+
+        <!-- 02 The job -->
+        <section data-slide data-label="The job" data-screen-label="02" data-chapter="The job" style="position:absolute;inset:0;width:1920px;height:1080px;background:#101010;color:#fff;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;gap:40px;overflow:hidden;">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div data-anim style="font-size:var(--type-micro);letter-spacing:.24em;text-transform:uppercase;color:var(--dim);">The job</div>
+            <h2 data-anim style="margin:0;max-width:1500px;font-size:var(--type-display);letter-spacing:-.02em;line-height:1.06;">The building is automated. The yard is still a radio and a whiteboard.</h2>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;min-height:0;">
+            <div data-anim style="border-top:1px solid var(--line2);padding-top:28px;">
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);">Inside</div>
+              <p style="margin:22px 0 0;font-size:var(--type-body);font-weight:300;line-height:1.4;color:var(--gray03);">A WMS knows every tote. Outbound waves are scheduled to the minute.</p>
+            </div>
+            <div data-anim style="border-top:1px solid var(--line2);padding-top:28px;">
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);">Outside</div>
+              <p style="margin:22px 0 0;font-size:var(--type-body);font-weight:300;line-height:1.4;color:var(--gray03);">A lead spotter works a radio. Trailers wait. The night shift turns over.</p>
+            </div>
+            <div data-anim style="border-top:1px solid var(--line2);padding-top:28px;">
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);">The tax</div>
+              <p style="margin:22px 0 0;font-size:var(--type-body);font-weight:300;line-height:1.4;color:var(--gray03);">Trailer dwell is the hidden cost on every wave. The analog yard is now the constraint.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 03 Why now -->
+        <section data-slide data-theme="light" data-label="Why now" data-screen-label="03" data-chapter="Why now" style="position:absolute;inset:0;width:1920px;height:1080px;background:var(--paper-warm);color:var(--ink);padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;gap:40px;overflow:hidden;">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:80px;">
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div data-anim style="font-size:var(--type-micro);letter-spacing:.24em;text-transform:uppercase;color:var(--inkmuted);">Why now</div>
+              <h2 data-anim style="margin:0;font-size:var(--type-title);letter-spacing:-.015em;line-height:1.05;">The geometry repeats. Learned autonomy holds here first.</h2>
+            </div>
+            <p data-anim style="margin:0 0 6px;max-width:520px;font-size:var(--type-small);color:var(--inkmuted);text-align:right;line-height:1.45;">A public street is open world. A yard is painted lines and the same fifty trailers.</p>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;min-height:0;">
+            <div data-anim style="background:#fff;border:1px solid var(--inkline);padding:36px 32px;display:flex;flex-direction:column;justify-content:space-between;">
+              <strong style="font-size:var(--type-subtitle);font-weight:400;letter-spacing:-.02em;">Closed world</strong>
+              <p style="margin:20px 0 0;font-size:var(--type-small);color:var(--inkmuted);line-height:1.45;">Fences, docks, and a night shift. Snow and unmarked construction still fall back to a human.</p>
+            </div>
+            <div data-anim style="background:#fff;border:1px solid var(--inkline);padding:36px 32px;display:flex;flex-direction:column;justify-content:space-between;">
+              <strong style="font-size:var(--type-subtitle);font-weight:400;letter-spacing:-.02em;">Software first</strong>
+              <p style="margin:20px 0 0;font-size:var(--type-small);color:var(--inkmuted);line-height:1.45;">Most buyers will not replace a working spotter truck. We attach to the fleet they already own.</p>
+            </div>
+            <div data-anim style="background:#fff;border:1px solid var(--inkline);padding:36px 32px;display:flex;flex-direction:column;justify-content:space-between;">
+              <strong style="font-size:var(--type-subtitle);font-weight:400;letter-spacing:-.02em;">Buyer is ready</strong>
+              <p style="margin:20px 0 0;font-size:var(--type-small);color:var(--inkmuted);line-height:1.45;">VP of transportation owns dwell. The DC general manager owns the night shift. Both will take a paid pilot.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 Product -->
+        <section data-slide data-label="Product" data-screen-label="04" data-chapter="Product" style="position:absolute;inset:0;width:1920px;height:1080px;background:#101010;color:#fff;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;gap:36px;overflow:hidden;">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div data-anim style="font-size:var(--type-micro);letter-spacing:.24em;text-transform:uppercase;color:var(--dim);">Product</div>
+            <h2 data-anim style="margin:0;font-size:var(--type-title);letter-spacing:-.015em;">Yard OS first. Vehicles optional.</h2>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;min-height:0;">
+            <div data-anim style="border-top:1px solid var(--accent);padding-top:28px;">
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);">01</div>
+              <h3 style="margin:18px 0 0;font-size:var(--type-subtitle);font-weight:400;">Yard graph</h3>
+              <p style="margin:16px 0 0;font-size:var(--type-small);color:var(--dim);line-height:1.5;">Live occupancy plus the door schedule. A tractor is sent only to a door that will be free.</p>
+            </div>
+            <div data-anim style="border-top:1px solid var(--line2);padding-top:28px;">
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);">02</div>
+              <h3 style="margin:18px 0 0;font-size:var(--type-subtitle);font-weight:400;">On-vehicle stack</h3>
+              <p style="margin:16px 0 0;font-size:var(--type-small);color:var(--dim);line-height:1.5;">Two lidars, a camera, RTK, and a safety PLC that can cut motion without asking the compute stack.</p>
+            </div>
+            <div data-anim style="border-top:1px solid var(--line2);padding-top:28px;">
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);">03</div>
+              <h3 style="margin:18px 0 0;font-size:var(--type-subtitle);font-weight:400;">Optional tractor</h3>
+              <p style="margin:16px 0 0;font-size:var(--type-small);color:var(--dim);line-height:1.5;">Electric yard tractor through a partner. We do not take inventory. We do not quote a vehicle margin as if it were ours.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05 Traction -->
+        <section data-slide data-label="Traction" data-screen-label="05" data-chapter="Proof" style="position:absolute;inset:0;width:1920px;height:1080px;background:#101010;color:#fff;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;gap:28px;overflow:hidden;">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:80px;">
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div data-anim style="font-size:var(--type-micro);letter-spacing:.24em;text-transform:uppercase;color:var(--dim);">Proof</div>
+              <h2 data-anim style="margin:0;font-size:var(--type-title);letter-spacing:-.015em;">Recognized revenue, GAAP.</h2>
+            </div>
+            <p data-anim style="margin:0 0 4px;font-size:var(--type-small);color:var(--dim);max-width:560px;text-align:right;line-height:1.45;">Q1 2025 – Q2 2026. Pipeline is not in this chart. June is preliminary.</p>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:420px 1fr;gap:54px;min-height:0;">
+            <div data-anim style="display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:28px 0;">
+              <span style="font-size:var(--type-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--dim);">Q1 2025 → Q2 2026</span>
+              <span data-count="3.3" data-count-suffix="×" style="margin-top:20px;font-size:132px;font-weight:300;color:var(--accent);line-height:.86;font-variant-numeric:tabular-nums;">0.0×</span>
+              <span style="margin-top:24px;font-size:var(--type-small);color:var(--dim);">$680K to $2.24M recognized. First profitable month: May 2026.</span>
+            </div>
+            <div data-anim style="display:flex;flex-direction:column;min-height:0;">
+              <div style="flex:1;display:flex;align-items:flex-end;gap:18px;padding:8px 0 12px;border-bottom:1px solid var(--line);">
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;justify-content:flex-end;">
+                  <div data-grow style="--h:30%;width:100%;background:#fff;border-radius:4px 4px 0 0;"></div>
+                  <span style="font-size:12px;color:var(--dim);">Q1’25</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;justify-content:flex-end;">
+                  <div data-grow style="--h:38%;width:100%;background:#fff;border-radius:4px 4px 0 0;"></div>
+                  <span style="font-size:12px;color:var(--dim);">Q2’25</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;justify-content:flex-end;">
+                  <div data-grow style="--h:50%;width:100%;background:#fff;border-radius:4px 4px 0 0;"></div>
+                  <span style="font-size:12px;color:var(--dim);">Q3’25</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;justify-content:flex-end;">
+                  <div data-grow style="--h:69%;width:100%;background:#fff;border-radius:4px 4px 0 0;"></div>
+                  <span style="font-size:12px;color:var(--dim);">Q4’25</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;justify-content:flex-end;">
+                  <div data-grow style="--h:81%;width:100%;background:#fff;border-radius:4px 4px 0 0;"></div>
+                  <span style="font-size:12px;color:var(--dim);">Q1’26</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;justify-content:flex-end;">
+                  <div data-grow style="--h:100%;width:100%;background:var(--accent);border-radius:4px 4px 0 0;"></div>
+                  <span style="font-size:12px;color:var(--accent);">Q2’26</span>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-top:22px;">
+                <div><strong style="display:block;font-size:var(--type-body);font-weight:400;">$9.72M</strong><span style="font-size:var(--type-micro);color:var(--dim);">June × 12</span></div>
+                <div><strong style="display:block;font-size:var(--type-body);font-weight:400;">$6.72M</strong><span style="font-size:var(--type-micro);color:var(--dim);">TTM recognized</span></div>
+                <div><strong style="display:block;font-size:var(--type-body);font-weight:400;">14</strong><span style="font-size:var(--type-micro);color:var(--dim);">Paying customers</span></div>
+                <div><strong style="display:block;font-size:var(--type-body);font-weight:400;">64%</strong><span style="font-size:var(--type-micro);color:var(--dim);">June gross margin</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 06 Network -->
+        <section data-slide data-theme="light" data-label="Network" data-screen-label="06" data-chapter="Proof" style="position:absolute;inset:0;width:1920px;height:1080px;background:var(--paper-warm);color:var(--ink);padding:var(--pad-top) var(--pad-x) 58px;display:flex;flex-direction:column;gap:32px;overflow:hidden;">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;">
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div data-anim style="font-size:var(--type-micro);letter-spacing:.24em;text-transform:uppercase;color:var(--inkmuted);">Proof</div>
+              <h2 data-anim style="margin:0;font-size:var(--type-title);letter-spacing:-.015em;">Fourteen contracted yards. Thirty-one live sites.</h2>
+            </div>
+            <p data-anim style="margin:0 0 6px;font-size:var(--type-small);color:var(--inkmuted);">Worked-example names. Replace before a real raise.</p>
+          </div>
+          <div data-anim style="flex:1;display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--inkline);border-bottom:1px solid var(--inkline);min-height:0;">
+            <div style="padding:28px 36px 28px 0;border-right:1px solid var(--inkline);border-bottom:1px solid var(--inkline);"><strong style="font-size:var(--type-body);font-weight:500;">Northstar Logistics</strong><span style="display:block;margin-top:8px;font-size:var(--type-small);color:var(--inkmuted);">3PL · 6 sites · paid Joliet pilot, then network</span></div>
+            <div style="padding:28px 0 28px 36px;border-bottom:1px solid var(--inkline);"><strong style="font-size:var(--type-body);font-weight:500;">Meridian Grocers</strong><span style="display:block;margin-top:8px;font-size:var(--type-small);color:var(--inkmuted);">Grocery DC · 4 sites · night shift first</span></div>
+            <div style="padding:28px 36px 28px 0;border-right:1px solid var(--inkline);border-bottom:1px solid var(--inkline);"><strong style="font-size:var(--type-body);font-weight:500;">Harborline Terminals</strong><span style="display:block;margin-top:8px;font-size:var(--type-small);color:var(--inkmuted);">Port · 3 sites · gate-to-stack, customs stay manual</span></div>
+            <div style="padding:28px 0 28px 36px;border-bottom:1px solid var(--inkline);"><strong style="font-size:var(--type-body);font-weight:500;">Redwood Cold Chain</strong><span style="display:block;margin-top:8px;font-size:var(--type-small);color:var(--inkmuted);">Cold storage · 3 sites · software on their fleet</span></div>
+            <div style="padding:28px 36px 28px 0;border-right:1px solid var(--inkline);"><strong style="font-size:var(--type-body);font-weight:500;">Prairie Pack + ten more</strong><span style="display:block;margin-top:8px;font-size:var(--type-small);color:var(--inkmuted);">CPG, parcel, metals, pharma 3PL, ag export</span></div>
+            <div style="padding:28px 0 28px 36px;"><strong style="font-size:var(--type-body);font-weight:500;">Top two = 38% of H1</strong><span style="display:block;margin-top:8px;font-size:var(--type-small);color:var(--inkmuted);">Named risk. The plan funds a second delivery pod.</span></div>
+          </div>
+        </section>
+
+        <!-- 07 Competition -->
+        <section data-slide data-label="Competition" data-screen-label="07" data-chapter="Why we win" style="position:absolute;inset:0;width:1920px;height:1080px;background:#101010;color:#fff;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;gap:36px;overflow:hidden;">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div data-anim style="font-size:var(--type-micro);letter-spacing:.24em;text-transform:uppercase;color:var(--dim);">Why we win</div>
+            <h2 data-anim style="margin:0;font-size:var(--type-title);letter-spacing:-.015em;">Four options that are not an operating system.</h2>
+          </div>
+          <table data-anim style="width:100%;border-collapse:collapse;font-size:var(--type-small);">
+            <thead>
+              <tr style="border-bottom:1px solid var(--line2);color:var(--dim);text-align:left;">
+                <th style="padding:16px 20px 16px 0;font-weight:500;"> </th>
+                <th style="padding:16px 20px;font-weight:500;">Yard OS</th>
+                <th style="padding:16px 20px;font-weight:500;">Driver-out today</th>
+                <th style="padding:16px 20px;font-weight:500;">Software without the vehicle</th>
+                <th style="padding:16px 20px;font-weight:500;">Union / hourly labor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--line);">
+                <td style="padding:22px 20px 22px 0;"><strong style="font-size:var(--type-body);font-weight:500;color:var(--accent);">Acme</strong><div style="margin-top:6px;color:var(--dim);font-size:16px;">OS first. Vehicles optional.</div></td>
+                <td style="padding:22px 20px;">Yes</td><td style="padding:22px 20px;">Partial</td><td style="padding:22px 20px;">Yes</td><td style="padding:22px 20px;">Yes</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);">
+                <td style="padding:22px 20px 22px 0;"><strong style="font-weight:500;">Vehicle OEMs</strong><div style="margin-top:6px;color:var(--dim);font-size:16px;">Sell a driverless tractor.</div></td>
+                <td style="padding:22px 20px;color:var(--dim);">—</td><td style="padding:22px 20px;">Yes</td><td style="padding:22px 20px;color:var(--dim);">—</td><td style="padding:22px 20px;">Partial</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line);">
+                <td style="padding:22px 20px 22px 0;"><strong style="font-weight:500;">WMS / YMS</strong><div style="margin-top:6px;color:var(--dim);font-size:16px;">Door schedules. No motion.</div></td>
+                <td style="padding:22px 20px;">Partial</td><td style="padding:22px 20px;color:var(--dim);">—</td><td style="padding:22px 20px;">Yes</td><td style="padding:22px 20px;">Yes</td>
+              </tr>
+              <tr>
+                <td style="padding:22px 20px 22px 0;"><strong style="font-weight:500;">Robotaxi stacks</strong><div style="margin-top:6px;color:var(--dim);font-size:16px;">The yard is a down-market demo.</div></td>
+                <td style="padding:22px 20px;color:var(--dim);">—</td><td style="padding:22px 20px;">Yes</td><td style="padding:22px 20px;">Partial</td><td style="padding:22px 20px;color:var(--dim);">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 08 Founders -->
+        <section data-slide data-label="Founders" data-screen-label="08" data-chapter="Why we win" style="position:absolute;inset:0;width:1920px;height:1080px;background:#101010;color:#fff;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1fr;gap:80px;overflow:hidden;">
+          <div data-anim style="display:flex;flex-direction:column;justify-content:center;gap:22px;border-top:1px solid var(--line2);padding-top:36px;">
+            <div style="font-size:var(--type-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--dim);">CEO, co-founder</div>
+            <h2 style="margin:0;font-size:var(--type-title);letter-spacing:-.015em;">Jordan Hale</h2>
+            <p style="margin:0;font-size:var(--type-body);font-weight:300;color:var(--gray03);line-height:1.4;">Off-highway autonomy at Caterpillar. Then fulfillment software at Amazon Robotics. The bottleneck was never the arm. It was the yard.</p>
+            <ul style="margin:8px 0 0;padding-left:1.1em;font-size:var(--type-small);color:var(--dim);line-height:1.55;">
+              <li>Shipped autonomy into unionized industrial sites.</li>
+              <li>Sells to the VP of transportation, not a digital-tour buyer.</li>
+              <li>Will not fund a vehicle company by accident.</li>
+            </ul>
+          </div>
+          <div data-anim style="display:flex;flex-direction:column;justify-content:center;gap:22px;border-top:1px solid var(--accent);padding-top:36px;">
+            <div style="font-size:var(--type-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);">CTO, co-founder</div>
+            <h2 style="margin:0;font-size:var(--type-title);letter-spacing:-.015em;">Priya Raman</h2>
+            <p style="margin:0;font-size:var(--type-body);font-weight:300;color:var(--gray03);line-height:1.4;">Perception for agricultural machines at John Deere. Robot learning at CMU. The yard is a closed world — that is where learned autonomy sticks.</p>
+            <p style="margin:8px 0 0;font-size:var(--type-small);color:var(--dim);line-height:1.5;">41 people. Chicago, Pittsburgh, Dallas. Delivery owns go-live, not slides.</p>
+          </div>
+        </section>
+
+        <!-- 09 The round -->
+        <section data-slide data-label="The round" data-screen-label="09" data-chapter="The round" style="position:absolute;inset:0;width:1920px;height:1080px;background:#101010;color:#fff;padding:var(--pad-top) var(--pad-x) 58px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+          <div>
+            <div data-anim style="font-size:var(--type-micro);letter-spacing:.24em;text-transform:uppercase;color:var(--dim);">The round</div>
+            <h2 data-anim style="margin:18px 0 0;max-width:1400px;font-size:var(--type-display);letter-spacing:-.02em;line-height:1.06;">Series A. The plan lives in the use-of-funds memo.</h2>
+            <p data-anim style="margin:28px 0 0;max-width:920px;font-size:var(--type-body);font-weight:300;color:var(--dim);line-height:1.45;">This slide does not carry a raise amount. Every allocation needs a denominator, and that page is the only place that has one.</p>
+          </div>
+          <div data-anim style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;border-top:1px solid var(--line2);padding-top:36px;">
+            <div>
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);">Concentration</div>
+              <p style="margin:14px 0 0;font-size:var(--type-small);color:var(--gray03);line-height:1.45;">Top two accounts were 38% of H1 2026. The plan funds a second delivery pod.</p>
+            </div>
+            <div>
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);">Safety calendar</div>
+              <p style="margin:14px 0 0;font-size:var(--type-small);color:var(--gray03);line-height:1.45;">We miss a quarter before we skip the joint safety review.</p>
+            </div>
+            <div>
+              <div style="font-size:var(--type-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);">Hardware temptation</div>
+              <p style="margin:14px 0 0;font-size:var(--type-small);color:var(--gray03);line-height:1.45;">We will sell a partner tractor. We will not take inventory.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10 Close -->
+        <section data-slide data-label="Close" data-screen-label="10" data-chapter="The round" style="position:absolute;inset:0;width:1920px;height:1080px;background:var(--accent);color:#fff;padding:0;overflow:hidden;">
+          <div style="position:absolute;left:var(--pad-x);top:160px;right:var(--pad-x);">
+            <div data-anim style="font-size:var(--type-micro);letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72);">Acme Corporation</div>
+            <h2 data-anim style="margin:20px 0 0;font-size:96px;letter-spacing:-.03em;line-height:.95;font-weight:300;">Win the yard.<br>Do not become a vehicle company.</h2>
+          </div>
+          <div data-anim style="position:absolute;left:var(--pad-x);bottom:80px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;width:calc(100% - 192px);border-top:1px solid rgba(255,255,255,.35);padding-top:28px;">
+            <div><div style="font-size:var(--type-micro);letter-spacing:.14em;text-transform:uppercase;opacity:.7;">IR</div><div style="margin-top:8px;font-size:var(--type-body);">jordan@acme.example</div></div>
+            <div><div style="font-size:var(--type-micro);letter-spacing:.14em;text-transform:uppercase;opacity:.7;">Chicago</div><div style="margin-top:8px;font-size:var(--type-body);">+1 (312) 555-0142</div></div>
+            <div><div style="font-size:var(--type-micro);letter-spacing:.14em;text-transform:uppercase;opacity:.7;">Next</div><div style="margin-top:8px;font-size:var(--type-body);">Open the data room</div></div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="deck-overview" hidden style="position:absolute;inset:0;z-index:40;background:#070707;overflow:auto;padding:40px 48px 80px;"></div>
+
+  <footer data-chrome style="flex:0 0 48px;display:flex;align-items:center;gap:16px;padding:0 20px;background:#101010;border-top:1px solid var(--chrome-line);font-size:12px;letter-spacing:.06em;color:var(--chrome-dim);z-index:20;">
+    <button type="button" data-action="prev" style="background:none;border:0;color:inherit;cursor:pointer;font:inherit;">←</button>
+    <button type="button" data-action="next" style="background:none;border:0;color:inherit;cursor:pointer;font:inherit;">→</button>
+    <span id="deck-counter" style="font-variant-numeric:tabular-nums;">01 / 10</span>
+    <div style="flex:1;height:2px;background:rgba(255,255,255,.14);overflow:hidden;">
+      <div id="deck-progress" style="height:100%;width:10%;background:var(--accent);transition:width .25s var(--ease);"></div>
     </div>
-  </body>
+    <button type="button" data-action="toggleRail" style="background:none;border:0;color:inherit;cursor:pointer;font:inherit;">T rail</button>
+    <button type="button" data-action="toggleOverview" style="background:none;border:0;color:inherit;cursor:pointer;font:inherit;">O overview</button>
+    <button type="button" data-action="toggleFullscreen" style="background:none;border:0;color:inherit;cursor:pointer;font:inherit;">F full</button>
+  </footer>
+</div>
+<script>
+(function () {
+  var W = 1920, H = 1080;
+  var root = document.getElementById('deck-root');
+  var stage = document.getElementById('deck-stage');
+  var viewport = document.getElementById('deck-viewport');
+  var rail = document.getElementById('deck-rail');
+  var ov = document.getElementById('deck-overview');
+  var prog = document.getElementById('deck-progress');
+  var counter = document.getElementById('deck-counter');
+  var slides = [].slice.call(stage.querySelectorAll('[data-slide]'));
+  var state = { i: 0, overview: false, rail: false };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function fit() {
+    var b = viewport.getBoundingClientRect();
+    var k = Math.min(b.width / W, b.height / H);
+    stage.style.transform = 'translate(' + ((b.width - W * k) / 2) + 'px,' + ((b.height - H * k) / 2) + 'px) scale(' + k + ')';
+  }
+
+  function chrome(light) {
+    var bg = light ? '#FFFFFF' : '#101010';
+    var railBg = light ? '#F2E8DE' : '#0A0A0A';
+    var fg = light ? '#101010' : '#FFFFFF';
+    var dim = light ? 'rgba(16,16,16,.6)' : 'rgba(255,255,255,.62)';
+    var line = light ? 'rgba(16,16,16,.14)' : 'rgba(255,255,255,.14)';
+    var foot = root.querySelector('footer[data-chrome]');
+    if (foot) { foot.style.background = bg; foot.style.color = dim; foot.style.borderTopColor = line; }
+    rail.style.background = railBg;
+    rail.style.borderRightColor = line;
+    rail.style.color = fg;
+  }
+
+  function countUp(el) {
+    var target = parseFloat(el.dataset.count);
+    var prefix = el.dataset.countPrefix || '';
+    var suffix = el.dataset.countSuffix || '';
+    if (reduce) { el.textContent = prefix + target + suffix; return; }
+    var start = performance.now();
+    function frame(now) {
+      var t = Math.min(1, (now - start) / 900);
+      var eased = 1 - Math.pow(1 - t, 3);
+      var v = target * eased;
+      el.textContent = prefix + (target >= 10 ? v.toFixed(1) : v.toFixed(1)) + suffix;
+      if (t < 1) requestAnimationFrame(frame);
+      else el.textContent = prefix + target + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function go(n, fromHash) {
+    if (n < 0 || n >= slides.length) return;
+    state.i = n;
+    slides.forEach(function (s, k) {
+      var on = k === n;
+      s.setAttribute('data-active', on ? '' : null);
+      if (!on) s.removeAttribute('data-active');
+      s.style.opacity = on ? '1' : '0';
+      s.style.pointerEvents = on ? 'auto' : 'none';
+      s.style.zIndex = on ? '2' : '1';
+    });
+    chrome(slides[n].dataset.theme === 'light');
+    counter.textContent = pad(n + 1) + ' / ' + pad(slides.length);
+    prog.style.width = ((n + 1) / slides.length * 100) + '%';
+    if (state.rail) {
+      [].slice.call(rail.querySelectorAll('button')).forEach(function (b, k) {
+        if (k === n) b.setAttribute('data-active', ''); else b.removeAttribute('data-active');
+      });
+    }
+    slides[n].querySelectorAll('[data-count]').forEach(countUp);
+    if (!fromHash) {
+      var url = new URL(location.href);
+      url.searchParams.set('slide', String(n + 1));
+      history.replaceState(null, '', url.pathname + url.search + '#/slide-' + (n + 1));
+    }
+    try {
+      if (window.parent !== window) {
+        window.parent.postMessage({ source: 'data-room-deck', type: 'slide', index: n + 1, total: slides.length, label: slides[n].dataset.label || '' }, '*');
+      }
+    } catch (e) {}
+  }
+
+  function hashIndex() {
+    var q = /[?&]slide=(\d+)/.exec(location.search || '');
+    var m = q || /slide-(\d+)/.exec(location.hash || '');
+    return m ? Math.max(0, Math.min(slides.length - 1, parseInt(m[1], 10) - 1)) : 0;
+  }
+
+  function buildRail() {
+    rail.textContent = '';
+    slides.forEach(function (s, n) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      var newCh = n > 0 && s.dataset.chapter !== slides[n - 1].dataset.chapter;
+      b.style.cssText = 'display:block;width:100%;text-align:left;background:transparent;border:0;color:var(--chrome-dim);cursor:pointer;padding:' + (newCh ? '14px' : '6px') + ' 4px 8px;border-top:' + (newCh ? '1px solid var(--chrome-line)' : '0') + ';font:400 12px/1.3 var(--face);';
+      b.innerHTML = '<div style="height:64px;background:#161616;border:1px solid rgba(255,255,255,.12);margin-bottom:6px;"></div><span style="font-variant-numeric:tabular-nums;opacity:.6">' + pad(n + 1) + '</span> ' + (s.dataset.label || '');
+      b.addEventListener('click', function () { go(n); });
+      rail.appendChild(b);
+    });
+  }
+
+  function buildOverview() {
+    ov.hidden = false;
+    ov.textContent = '';
+    ov.style.display = 'grid';
+    ov.style.gridTemplateColumns = 'repeat(auto-fill,minmax(280px,1fr))';
+    ov.style.gap = '22px';
+    slides.forEach(function (s, n) {
+      if (n === 0 || s.dataset.chapter !== slides[n - 1].dataset.chapter) {
+        var h = document.createElement('div');
+        h.style.cssText = 'grid-column:1/-1;margin-top:8px;font:500 11px/1 var(--face);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);';
+        h.textContent = s.dataset.chapter || '';
+        ov.appendChild(h);
+      }
+      var b = document.createElement('button');
+      b.type = 'button';
+      if (n === state.i) b.setAttribute('data-active', '');
+      b.style.cssText = 'background:#111;border:1px solid rgba(255,255,255,.12);color:#fff;padding:16px;text-align:left;cursor:pointer;font:400 15px/1.3 var(--face);';
+      b.innerHTML = '<div style="font-size:11px;opacity:.5;margin-bottom:8px;">' + pad(n + 1) + '</div>' + (s.dataset.label || '');
+      b.addEventListener('click', function () { setOverview(false); go(n); });
+      ov.appendChild(b);
+    });
+  }
+
+  function setRail(on) {
+    state.rail = on;
+    rail.style.display = on ? 'flex' : 'none';
+    if (on) buildRail();
+    fit();
+  }
+
+  function setOverview(on) {
+    state.overview = on;
+    if (on) buildOverview();
+    else { ov.hidden = true; ov.style.display = 'none'; ov.textContent = ''; }
+  }
+
+  document.addEventListener('click', function (e) {
+    var story = e.target.closest('[data-story-target]');
+    if (story) { go(parseInt(story.dataset.storyTarget, 10) - 1); return; }
+    var b = e.target.closest('[data-action]');
+    if (!b) return;
+    var a = b.dataset.action;
+    if (a === 'next') go(state.i + 1);
+    else if (a === 'prev') go(state.i - 1);
+    else if (a === 'toggleRail') setRail(!state.rail);
+    else if (a === 'toggleOverview') setOverview(!state.overview);
+    else if (a === 'toggleFullscreen') {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (root.requestFullscreen) root.requestFullscreen();
+      setTimeout(fit, 250);
+    }
+  });
+
+  window.addEventListener('keydown', function (e) {
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { e.preventDefault(); go(state.i + 1); }
+    else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); go(state.i - 1); }
+    else if (k === 'Home') go(0);
+    else if (k === 'End') go(slides.length - 1);
+    else if (k === 'o' || k === 'O') setOverview(!state.overview);
+    else if (k === 't' || k === 'T') setRail(!state.rail);
+    else if (k === 'f' || k === 'F') {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (root.requestFullscreen) root.requestFullscreen();
+      setTimeout(fit, 250);
+    } else if (k === 'Escape' && state.overview) setOverview(false);
+  });
+
+  var x0 = null;
+  viewport.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  viewport.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 60) go(state.i + (dx < 0 ? 1 : -1));
+    x0 = null;
+  }, { passive: true });
+
+  window.addEventListener('resize', fit);
+  window.addEventListener('hashchange', function () { go(hashIndex(), true); });
+  window.addEventListener('popstate', function () { go(hashIndex(), true); });
+
+  slides.forEach(function (s) {
+    s.style.opacity = '0';
+    s.style.pointerEvents = 'none';
+  });
+  fit();
+  go(hashIndex(), true);
+})();
+</script>
+</body>
 </html>
