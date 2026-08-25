@@ -16,11 +16,11 @@ describe("isInternalViewer", () => {
   });
 
   it("accepts the configured domain and rejects lookalikes", () => {
-    expect(isInternalViewer("founder@example.com")).toBe(true);
-    expect(isInternalViewer("founder@example.com.evil.com")).toBe(false);
-    expect(isInternalViewer("founder@notexample.com")).toBe(false);
-    expect(isInternalViewer('attacker@evil.com?x=@example.com')).toBe(false);
-    expect(isInternalViewer('"foo@example.com"@evil.com')).toBe(false);
+    expect(isInternalViewer("jordan@acme.example")).toBe(true);
+    expect(isInternalViewer("jordan@acme.example.evil.com")).toBe(false);
+    expect(isInternalViewer("jordan@notacme.example")).toBe(false);
+    expect(isInternalViewer("attacker@evil.com?x=@acme.example")).toBe(false);
+    expect(isInternalViewer('"foo@acme.example"@evil.com')).toBe(false);
   });
 });
 
@@ -31,7 +31,7 @@ describe("canViewAudience", () => {
   });
 
   it("restricts internal documents to the company domain", () => {
-    expect(canViewAudience("internal", "founder@example.com")).toBe(true);
+    expect(canViewAudience("internal", "jordan@acme.example")).toBe(true);
     expect(canViewAudience("internal", "partner@fund.example")).toBe(false);
   });
 });

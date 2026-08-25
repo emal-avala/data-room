@@ -11,7 +11,7 @@
 
 export function getSuperadminEmail(): string {
   const configured = process.env.SUPERADMIN_EMAIL?.trim().toLowerCase();
-  return configured || "founder@example.com";
+  return configured || "jordan@acme.example";
 }
 
 export function normalizeAdminEmail(
