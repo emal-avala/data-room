@@ -40,7 +40,7 @@ bun install && bun dev    # http://localhost:3000
 ```
 
 **Demo (no login):** [emal-avala.github.io/data-room](https://emal-avala.github.io/data-room/)
-— static HTML from `demo/`, published on the `gh-pages` branch.
+— static HTML from `demo/`, published from the `gh-pages` branch.
 
 ## Deploy
 
@@ -60,9 +60,11 @@ bun install && bun dev    # http://localhost:3000
 
 | Route | What it is |
 |-------|------------|
-| `/` | Homepage. Metric cards start as `—`. Edit `src/app/page.tsx`. |
-| `/docs`, `/docs/[slug]` | Document library. Registry: `src/lib/documents.ts`. |
-| `/company`, `/contact` | Firm pages. |
+| `/` | Acme overview: metrics, why-now, recognized revenue, contracted yards. |
+| `/roadmap` | Path, next ship, competitive matrix. |
+| `/financials` | Books hub — P&L, forecast, pipeline, revenue by customer. |
+| `/docs`, `/docs/[slug]` | Data room. Registry: `src/lib/documents.ts`. |
+| `/company`, `/contact` | Founders, offices, risks, IR contact. |
 | `/login` | Google + Microsoft. New emails go to `/pending-approval`. |
 | `/admin` | Access queue, viewers, rooms, analytics. |
 
@@ -96,6 +98,7 @@ How a viewer gets in:
 | [Local development](docs/deploy/local-development.md) | Supabase CLI |
 | [GitHub Pages](docs/deploy/github-pages.md) | Public demo |
 | [Branding](docs/guides/branding.md) | Name, color, font, copy |
+| [Deck theme](docs/guides/deck.md) | Ten-slide HTML deck + restyle |
 | [Add a document](docs/guides/add-document.md) | Registry + gating |
 | [Room variants](docs/guides/dataroom-variants.md) | Core vs full |
 | [Analytics](docs/guides/analytics.md) | Events, digest |
