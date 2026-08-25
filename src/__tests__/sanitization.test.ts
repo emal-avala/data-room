@@ -7,6 +7,7 @@ import { execSync } from "node:child_process";
  */
 const BANNED = [
   ["ava", "la.ai"].join(""),
+  "(?<!-)\\b" + ["ava", "la"].join("") + "\\b",
   ["em", "al@"].join(""),
   ["lucid", " motors"].join(""),
   ["serve", " robotics"].join(""),
@@ -15,7 +16,17 @@ const BANNED = [
   ["#ff", "5c00"].join(""),
 ];
 
-const ROOTS = ["src", "content", "supabase", "scripts"];
+const ROOTS = [
+  "src",
+  "content",
+  "supabase",
+  "scripts",
+  "demo",
+  "NOTICE",
+  "GOVERNANCE.md",
+  "SECURITY.md",
+  "CODE_OF_CONDUCT.md",
+];
 
 describe("sanitization", () => {
   it("does not contain upstream proprietary markers", () => {
@@ -23,13 +34,23 @@ describe("sanitization", () => {
     for (const needle of BANNED) {
       try {
         const output = execSync(
-          `rg -i -n --glob '!node_modules/**' --glob '!.next/**' --glob '!**/sanitization.test.ts' ${JSON.stringify(needle)} ${ROOTS.join(" ")}`,
+          `rg -i -n --pcre2 --glob '!node_modules/**' --glob '!.next/**' --glob '!**/sanitization.test.ts' ${JSON.stringify(needle)} ${ROOTS.join(" ")}`,
           { encoding: "utf8" },
         );
-        if (output.trim()) hits.push(`${needle}\n${output}`);
+        const filtered = output
+          .split("\n")
+          .filter((line) => line.trim() && !line.toLowerCase().includes("emal-avala"))
+          .join("\n");
+        if (filtered.trim()) hits.push(`${needle}\n${filtered}`);
       } catch (error) {
         const result = error as { status?: number; stdout?: string };
-        if (result.status !== 1 && result.stdout) hits.push(`${needle}\n${result.stdout}`);
+        if (result.status !== 1 && result.stdout) {
+          const filtered = result.stdout
+            .split("\n")
+            .filter((line) => line.trim() && !line.toLowerCase().includes("emal-avala"))
+            .join("\n");
+          if (filtered.trim()) hits.push(`${needle}\n${filtered}`);
+        }
       }
     }
     expect(hits).toEqual([]);

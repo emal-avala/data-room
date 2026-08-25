@@ -24,9 +24,8 @@ export default async function DocumentsPage() {
       <p className="text-eyebrow">Data room</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight">Documents</h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
-        Primary materials are listed. On-request items appear after an admin
-        grant. Version badges update when you bump <code>version</code> in the
-        registry.
+        Core room: deck, memo, financials. Full room adds use of funds, go-to-market, architecture, site notes, and
+        the NDA-gated cap table.
       </p>
       <div className="mt-12 space-y-12">
         {categories.map((category) => (
@@ -37,6 +36,7 @@ export default async function DocumentsPage() {
                 <Link key={doc.slug} href={`/docs/${doc.slug}`} className="container-box p-6">
                   <p className="text-xs uppercase tracking-wider text-muted-foreground">
                     {doc.type}
+                    {doc.requireNda ? " · NDA" : ""}
                   </p>
                   <h3 className="mt-2 font-semibold">{doc.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{doc.description}</p>
