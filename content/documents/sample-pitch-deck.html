@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sample pitch deck</title>
+    <style>
+      :root {
+        --ink: #141821;
+        --muted: #676b73;
+        --paper: #ffffff;
+        --accent: #1d4ed8;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; background: #111; color: var(--ink); font-family: "Source Sans 3", system-ui, sans-serif; }
+      .deck { width: 100%; max-width: 960px; margin: 0 auto; }
+      .slide {
+        background: var(--paper);
+        aspect-ratio: 16 / 9;
+        padding: 64px;
+        margin: 24px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .eyebrow { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+      h1 { font-weight: 600; font-size: 42px; margin: 12px 0 0; letter-spacing: -0.03em; }
+      p { color: var(--muted); font-size: 18px; max-width: 36em; }
+      ul { margin: 0; padding-left: 1.2em; color: var(--ink); font-size: 18px; line-height: 1.6; }
+      @media print {
+        body { background: white; }
+        .slide { break-after: page; margin: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="deck">
+      <section class="slide">
+        <p class="eyebrow">Sample · Slide 1 of 5</p>
+        <h1>Your company name</h1>
+        <p>Replace this HTML file. It is a layout, not a pitch. No real figures ship in this repository.</p>
+      </section>
+      <section class="slide">
+        <p class="eyebrow">Problem</p>
+        <h1>Name the job the buyer cannot finish.</h1>
+        <p>Two sentences. A person, a constraint, a cost.</p>
+      </section>
+      <section class="slide">
+        <p class="eyebrow">Product</p>
+        <h1>What you ship today.</h1>
+        <ul>
+          <li>One capability in production</li>
+          <li>One proof a customer already accepted</li>
+          <li>One thing you will not build this year</li>
+        </ul>
+      </section>
+      <section class="slide">
+        <p class="eyebrow">Traction</p>
+        <h1>Leave the numbers out of Git.</h1>
+        <p>Put figures in a private <code>src/data/</code> module after you fork. This skeleton keeps the slide empty so a public clone cannot leak a book.</p>
+      </section>
+      <section class="slide">
+        <p class="eyebrow">The round</p>
+        <h1>Keep the ask for the conversation.</h1>
+        <p>The use-of-funds memo is the place that models a plan size. This slide does not.</p>
+      </section>
+    </div>
+  </body>
+</html>
