@@ -40,8 +40,7 @@ bun install && bun dev    # http://localhost:3000
 ```
 
 **Demo (no login):** [emal-avala.github.io/data-room](https://emal-avala.github.io/data-room/)
-— static HTML from `demo/`. Enable once: Settings → Pages → Source:
-GitHub Actions, then run the Pages workflow.
+— static HTML from `demo/`, published on the `gh-pages` branch.
 
 ## Deploy
 
