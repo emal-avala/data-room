@@ -3,26 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Architecture · Acme Corporation</title>
+    <title>Technical architecture · Acme Corporation</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header class="header">
       <div class="header-inner">
-        <a class="brand" href="./index.html">Acme Corporation</a>
-        <nav class="nav"><a href="./docs.html">Documents</a></nav>
+        <a class="brand" href="./index.html">Acme Corporation <span class="muted">Series A</span></a>
+        <nav class="nav">
+          <a href="./index.html">Overview</a>
+          <a class="active" href="./docs.html">Documents</a>
+        </nav>
       </div>
     </header>
     <article class="article">
       <p class="eyebrow">Product</p>
-      <h1 style="font-size: 2rem">Technical architecture</h1>
+      <h1>Technical architecture</h1>
+      <p class="muted">On-vehicle stack, yard graph, and what never leaves the site.</p>
       <h2>On the tractor</h2>
-      <p>Two lidars, a forward camera, RTK GPS, and a safety PLC that can cut motion without asking the compute stack.</p>
+      <p>Two lidars, a forward camera, RTK GPS, and a safety PLC that can cut motion without asking the compute stack. Perception runs on an industrial GPU. The motion planner will not issue a command the PLC has not pre-cleared.</p>
       <h2>Yard graph</h2>
-      <p>A surveyed map plus live occupancy. Dispatch assigns a tractor to a door only if the alley is clear and the WMS says the door will be free.</p>
+      <p>A surveyed map plus live occupancy. Dispatch assigns a tractor to a door only if the graph says the alley is clear and the WMS says the door will be free. The night-shift lead can override any assignment. Overrides are training data.</p>
       <h2>What stays on-prem</h2>
-      <p>Raw sensor recordings do not leave a pharma or port site. Model weights can leave; the bags do not.</p>
+      <p>Raw sensor recordings do not leave a pharma or port site. We train on-site or on a customer-approved region. Model weights can leave; the bags do not. That is in the contract, not the pitch.</p>
+      <h2>Integrations</h2>
+      <p>Door events from the WMS. Gate appointments from the YMS if one exists. Trailer IDs from the yard camera when the WMS is silent. We will not replace a working WMS. We sit beside it.</p>
+      <h2>What we will not build this year</h2>
+      <p>Public-road autonomy. A consumer app. A second vehicle SKU under our own brand. A second continent.</p>
     </article>
     <footer class="footer"><a href="./docs.html">All documents</a></footer>
   </body>
