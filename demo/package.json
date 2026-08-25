@@ -1,0 +1,8 @@
+{
+  "name": "data-room-demo",
+  "private": true,
+  "description": "Static preview published to gh-pages. Not the Next.js app. vercel-build must never invoke next.",
+  "scripts": {
+    "vercel-build": "node -e \"console.log('data-room static demo')\""
+  }
+}
