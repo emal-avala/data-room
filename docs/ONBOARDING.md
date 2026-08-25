@@ -150,8 +150,8 @@ Full page: [deploy/vercel-supabase.md](deploy/vercel-supabase.md).
 `demo/` is static HTML. Investors should use the Vercel app. Pages is
 the public walkthrough.
 
-1. Repo **Settings → Pages → Source: GitHub Actions**.
-2. Actions → **Pages** → Run workflow.
+1. Run the **Pages** workflow so the `gh-pages` branch exists.
+2. Repo **Settings → Pages → Source: Deploy from a branch** → `gh-pages` / `/`.
 3. Site: `https://<you>.github.io/data-room/`
 
 [deploy/github-pages.md](deploy/github-pages.md).
