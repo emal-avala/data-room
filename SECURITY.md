@@ -2,8 +2,8 @@
 
 ## Report a vulnerability
 
-Email **security@avala.ai**. Do not open a public issue for a leak of gated
-documents, an auth bypass, or an open redirect.
+Use GitHub Security Advisories on this repository. Do not open a public issue
+for a leak of gated documents, an auth bypass, or an open redirect.
 
 ## Invariants
 

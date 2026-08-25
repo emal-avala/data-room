@@ -8,7 +8,7 @@ Operator guides. Link new how-tos from the root README table.
 | `deploy/vercel-supabase.md` | First production deploy |
 | `deploy/environment-variables.md` | Every env key |
 | `deploy/local-development.md` | Supabase CLI + localhost |
-| `deploy/github-pages.md` | Static demo from the `gh-pages` branch |
+| `deploy/github-pages.md` | Static demo, enable Actions Pages |
 | `guides/add-document.md` | Adding a slug end-to-end |
 | `guides/dataroom-variants.md` | Core vs full rooms |
 | `guides/branding.md` | Name, domain, accent |
