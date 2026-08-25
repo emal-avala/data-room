@@ -1,7 +1,7 @@
 # Governance
 
-Published by [Avala AI](https://github.com/avala-ai). Maintainers review
-PRs against [CONTRIBUTING.md](CONTRIBUTING.md).
+This repository is maintained on GitHub. Review pull requests against
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 - Day-to-day: a maintainer reviews and merges.
 - Charter changes: open an issue first.

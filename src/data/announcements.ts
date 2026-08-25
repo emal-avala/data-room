@@ -15,9 +15,9 @@ export type Announcement = {
 
 export const ANNOUNCEMENTS: Announcement[] = [
   {
-    id: "welcome",
-    message: "Sample data room. Edit this banner in src/data/announcements.ts.",
-    href: "/docs",
+    id: "q2-close",
+    message: "Q2 2026 preliminary close is posted in Financials and the data room.",
+    href: "/financials",
     active: true,
   },
 ];
