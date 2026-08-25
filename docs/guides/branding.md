@@ -60,15 +60,16 @@ Keep the CSS variable name. `demo/styles.css` uses a Google Fonts
 
 | Surface | File |
 |---------|------|
-| Homepage hero + metric cards | `src/app/page.tsx` |
-| Company | `src/app/company/page.tsx` |
+| Homepage hero + metric cards | `src/data/metrics.ts` + `src/app/page.tsx` |
+| Company | `src/data/company.ts` + `src/app/company/page.tsx` |
 | Contact | `src/app/contact/page.tsx` |
+| Financials / roadmap | `src/data/financials.ts`, `src/data/roadmap.ts` |
 | Banner | `src/data/announcements.ts` |
 | Footer | `src/components/Footer.tsx` (uses `siteConfig`) |
 | NDA | `src/lib/nda-agreement.ts` |
-| Memo / financials / use-of-funds | `src/app/docs/[slug]/page.tsx` |
+| Memos | `src/content/ir/articles.tsx` |
 
-Leave a cell as `—` until you have a number you are willing to show.
+The repo ships **Acme Corporation** as a complete worked example. Replace `src/data/` before you invite a real fund. Do not type a dollar figure in two files.
 
 ## Icon
 
@@ -76,6 +77,8 @@ Replace `public/icon.svg`. Keep it simple; it is the favicon.
 
 ## Deck
 
-Replace `content/documents/sample-pitch-deck.html`. The production
+Replace `content/documents/sample-pitch-deck.html`. Keep the ten-slide
+spine and `ACCENT` contract in `docs/guides/deck.md`. The production
 viewer loads it through `/api/docs/pitch-deck/deck` and stamps the
-email. Update `demo/deck.html` so the public preview stays honest.
+email. `demo/deck.html` must stay byte-identical — `deck-theme.test.ts`
+enforces that.

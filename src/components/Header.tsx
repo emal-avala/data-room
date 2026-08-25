@@ -9,6 +9,8 @@ import { cn } from "@/lib/cn";
 
 const NAV = [
   { href: "/", label: "Overview" },
+  { href: "/roadmap", label: "Roadmap" },
+  { href: "/financials", label: "Financials" },
   { href: "/docs", label: "Documents" },
   { href: "/company", label: "Company" },
   { href: "/contact", label: "Contact" },
@@ -41,7 +43,7 @@ export function Header() {
                 href={item.href}
                 className={cn(
                   "text-sm text-muted-foreground transition-colors hover:text-foreground",
-                  active && "text-foreground",
+                  active && "font-medium text-primary",
                 )}
               >
                 {item.label}

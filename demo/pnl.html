@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>P&amp;L · Acme Corporation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <a class="brand" href="./index.html">Acme Corporation</a>
+        <nav class="nav">
+          <a href="./financials.html">Overview</a>
+          <a class="active" href="./pnl.html">P&amp;L</a>
+          <a href="./forecast.html">Forecast</a>
+          <a href="./pipeline.html">Pipeline</a>
+          <a href="./revenue.html">By customer</a>
+        </nav>
+      </div>
+    </header>
+    <div class="wrap">
+      <p class="eyebrow">Financials</p>
+      <h1 style="font-size: 2rem">Historical P&amp;L</h1>
+      <p class="lede">Monthly recognized revenue and functional costs. Quarters in the ledger are the sum of these months.</p>
+      <div class="grid grid-4" style="margin-top: 2rem">
+        <div class="card"><div class="muted">FY 2025 recognized</div><div class="metric">$4.18M</div></div>
+        <div class="card"><div class="muted">FY 2025 net</div><div class="metric">−$1.06M</div></div>
+        <div class="card"><div class="muted">H1 2026 recognized</div><div class="metric">$4.06M</div></div>
+        <div class="card"><div class="muted">H1 2026 net</div><div class="metric">$115K</div></div>
+      </div>
+      <table>
+        <thead><tr><th>Period</th><th>Recognized</th><th>GM</th><th>Net income</th></tr></thead>
+        <tbody>
+          <tr><td>Q1 2025</td><td>$680,000</td><td>44%</td><td>−$410,000</td></tr>
+          <tr><td>Q2 2025</td><td>$840,000</td><td>47%</td><td>−$360,000</td></tr>
+          <tr><td>Q3 2025</td><td>$1,120,000</td><td>50%</td><td>−$210,000</td></tr>
+          <tr><td>Q4 2025</td><td>$1,540,000</td><td>53%</td><td>−$80,000</td></tr>
+          <tr><td>Q1 2026</td><td>$1,820,000</td><td>56%</td><td>$20,000</td></tr>
+          <tr><td>Q2 2026</td><td>$2,240,000</td><td>60%</td><td>$95,000</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top: 1rem">May 2026 is the first profitable month ($42K). June 2026 recognized $810K at 64% gross margin.</p>
+    </div>
+    <footer class="footer"><a href="./financials.html">Financials hub</a></footer>
+  </body>
+</html>
