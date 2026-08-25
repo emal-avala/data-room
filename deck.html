@@ -1,33 +1,166 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pitch deck · Example Co.</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <header class="header">
-      <div class="header-inner">
-        <a class="brand" href="./index.html">Example Co.</a>
-        <nav class="nav">
-          <a href="./index.html">Overview</a>
-          <a class="active" href="./docs.html">Documents</a>
-          <a href="./admin.html">Admin</a>
-        </nav>
-      </div>
-    </header>
-    <div class="deck">
-      <p class="eyebrow">Overview</p>
-      <h2>Sample pitch deck</h2>
-      <p class="muted">In production this iframe is a stamped HTML deck from <code>/api/docs/pitch-deck/deck</code>.</p>
-      <div class="slide" style="margin-top: 1.5rem">
-        <p class="eyebrow" style="color: #93c5fd">Series A</p>
-        <h1>Example Co.</h1>
-        <p>The institutional data room for your round.</p>
-      </div>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acme Corporation — Pitch Deck</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --ink: #f5f5f4;
+    --muted: #a8a29e;
+    --accent: #1D4ED8;
+    --card: #171717;
+    --line: #262626;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+  body { overflow: hidden; }
+  .deck { height: 100%; width: 100%; }
+  section {
+    height: 100vh; width: 100%; display: none; flex-direction: column; justify-content: center;
+    padding: 8vh 10vw; position: relative;
+  }
+  section.active { display: flex; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 600; }
+  h1 { font-size: clamp(36px, 6vw, 72px); letter-spacing: -0.04em; line-height: 1.05; font-weight: 600; max-width: 14ch; }
+  h2 { font-size: clamp(28px, 4.2vw, 48px); letter-spacing: -0.03em; line-height: 1.1; font-weight: 600; margin-bottom: 20px; }
+  p.lead { font-size: clamp(16px, 2vw, 22px); color: var(--muted); max-width: 46ch; line-height: 1.5; }
+  .grid { display: grid; gap: 16px; margin-top: 28px; }
+  .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; }
+  .card h3 { font-size: 15px; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 14px; line-height: 1.45; }
+  .metric { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; letter-spacing: -0.03em; }
+  .metric span { display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 6px; font-weight: 500; }
+  ul.clean { list-style: none; display: grid; gap: 10px; color: var(--muted); font-size: 16px; }
+  .footer {
+    position: absolute; bottom: 28px; left: 10vw; right: 10vw;
+    display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; letter-spacing: 0.06em;
+  }
+  .progress { position: absolute; top: 0; left: 0; height: 3px; background: var(--accent); width: 10%; }
+  @media (max-width: 800px) {
+    .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; }
+    section { padding: 10vh 7vw; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+  <section class="active" data-slide="1">
+    <div class="eyebrow">Confidential · Series A</div>
+    <h1>Physical AI data, closed-loop.</h1>
+    <p class="lead" style="margin-top:20px">Acme Corporation is the open Physical AI data platform for robotics and autonomous-vehicle companies.</p>
+    <div class="footer"><span>Acme Corporation</span><span>01 / 10</span></div>
+  </section>
+  <section data-slide="2">
+    <div class="eyebrow">Problem</div>
+    <h2>Fleets drown in sensor data and starve models.</h2>
+    <div class="grid cols-3">
+      <div class="card"><h3>Fragmented ingest</h3><p>MCAP, LiDAR, and video land in disconnected lakes with no shared schema.</p></div>
+      <div class="card"><h3>Slow labeling</h3><p>2D/3D/4D work is queued across vendors with no QC or consensus loop.</p></div>
+      <div class="card"><h3>No re-label trigger</h3><p>Drift is discovered after a model fails in the field, not from the training set.</p></div>
     </div>
-    <footer class="footer"><a href="./docs.html">All documents</a></footer>
-  </body>
+    <div class="footer"><span>Acme Corporation</span><span>02 / 10</span></div>
+  </section>
+  <section data-slide="3">
+    <div class="eyebrow">Solution</div>
+    <h2>One loop from ingest to re-label.</h2>
+    <p class="lead">Sensor ingest → WebGPU visualization → human + AI labeling → QC → exports → training → drift → re-label.</p>
+    <div class="footer"><span>Acme Corporation</span><span>03 / 10</span></div>
+  </section>
+  <section data-slide="4">
+    <div class="eyebrow">Product</div>
+    <h2>Built for Physical AI operators.</h2>
+    <div class="grid cols-3">
+      <div class="card"><h3>Mission Control</h3><p>WebGPU viewer and labeling for sequences, images, and 3D/4D work.</p></div>
+      <div class="card"><h3>Arcade</h3><p>Mobile workforce app for managed labeling and QC at the edge.</p></div>
+      <div class="card"><h3>Exports + training</h3><p>Customer-ready datasets, drift detection, and a re-label trigger.</p></div>
+    </div>
+    <div class="footer"><span>Acme Corporation</span><span>04 / 10</span></div>
+  </section>
+  <section data-slide="5">
+    <div class="eyebrow">Market</div>
+    <h2>Robotics and AV training data is the bottleneck.</h2>
+    <div class="grid cols-3">
+      <div class="card"><div class="metric">$4.2B<span>SAM 2026</span></div></div>
+      <div class="card"><div class="metric">31%<span>CAGR to 2029</span></div></div>
+      <div class="card"><div class="metric">12<span>design partners</span></div></div>
+    </div>
+    <div class="footer"><span>Acme Corporation</span><span>05 / 10</span></div>
+  </section>
+  <section data-slide="6">
+    <div class="eyebrow">Traction</div>
+    <h2>Paid design partners, expanding seats.</h2>
+    <div class="grid cols-3">
+      <div class="card"><div class="metric">$2.4M<span>ARR</span></div></div>
+      <div class="card"><div class="metric">118%<span>NDR</span></div></div>
+      <div class="card"><div class="metric">4.2mo<span>payback</span></div></div>
+    </div>
+    <div class="footer"><span>Acme Corporation</span><span>06 / 10</span></div>
+  </section>
+  <section data-slide="7">
+    <div class="eyebrow">Business model</div>
+    <h2>Platform + usage + managed workforce.</h2>
+    <ul class="clean">
+      <li>Platform seats for Mission Control and analytics.</li>
+      <li>Usage on stored sequences, labeling minutes, and export jobs.</li>
+      <li>Managed workforce for customers who want labeled datasets, not tools.</li>
+    </ul>
+    <div class="footer"><span>Acme Corporation</span><span>07 / 10</span></div>
+  </section>
+  <section data-slide="8">
+    <div class="eyebrow">Go-to-market</div>
+    <h2>Land in the data platform. Expand into the loop.</h2>
+    <div class="grid cols-2">
+      <div class="card"><h3>Land</h3><p>Ingest + visualization for one fleet or one labeling team.</p></div>
+      <div class="card"><h3>Expand</h3><p>Add QC, exports, training hooks, and managed workforce as volume grows.</p></div>
+    </div>
+    <div class="footer"><span>Acme Corporation</span><span>08 / 10</span></div>
+  </section>
+  <section data-slide="9">
+    <div class="eyebrow">The ask</div>
+    <h2>$18M Series A to become the Physical AI data standard.</h2>
+    <div class="grid cols-3">
+      <div class="card"><h3>Product</h3><p>Ship the closed loop: drift detection and automatic re-label queues.</p></div>
+      <div class="card"><h3>Go-to-market</h3><p>Double the design-partner motion into AV and humanoid robotics.</p></div>
+      <div class="card"><h3>Team</h3><p>Hire labeling research, infra, and customer engineering.</p></div>
+    </div>
+    <div class="footer"><span>Acme Corporation</span><span>09 / 10</span></div>
+  </section>
+  <section data-slide="10">
+    <div class="eyebrow">Close</div>
+    <h1>The data loop for machines that move.</h1>
+    <p class="lead" style="margin-top:20px">iris.p@example.org · confidential</p>
+    <div class="footer"><span>Acme Corporation</span><span>10 / 10</span></div>
+  </section>
+</div>
+<script>
+(function () {
+  var ACCENT='#1D4ED8';
+  var slides = Array.prototype.slice.call(document.querySelectorAll('section[data-slide]'));
+  var progress = document.getElementById('progress');
+  var i = 0;
+  function show(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    progress.style.background = ACCENT;
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(i + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(i - 1); }
+  });
+  var startX = 0;
+  document.addEventListener('touchstart', function (e) { startX = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+  show(0);
+})();
+</script>
+</body>
 </html>
