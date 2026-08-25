@@ -59,7 +59,14 @@ export const CORE_DOCUMENTS = [
 ] as const;
 
 /** Extra slugs reserved for an active lead conversation. */
-export const FULL_ONLY_DOCUMENTS = ["use-of-funds", "cap-table"] as const;
+export const FULL_ONLY_DOCUMENTS = [
+  "use-of-funds",
+  "cap-table",
+  "go-to-market",
+  "competitive-landscape",
+  "technical-architecture",
+  "case-studies",
+] as const;
 
 /**
  * Sample plan sizes the use-of-funds page can model. These are placeholders.
@@ -73,11 +80,31 @@ export const DATAROOM_RAISE_AMOUNTS_CENTS = [
 ] as const;
 
 export const DEFAULT_USE_OF_FUNDS: readonly UseOfFundsAllocation[] = [
-  { category: "Product", percentage: 40, description: "Engineering and product." },
-  { category: "Go-to-market", percentage: 25, description: "Sales and customer success." },
-  { category: "Operations", percentage: 15, description: "G&A and infrastructure." },
-  { category: "People", percentage: 15, description: "Hiring the next twelve months." },
-  { category: "Reserve", percentage: 5, description: "Working-capital buffer." },
+  {
+    category: "Product",
+    percentage: 40,
+    description: "On-vehicle perception, multi-yard dispatch, snow mode, and the partner-tractor interface.",
+  },
+  {
+    category: "Go-to-market",
+    percentage: 25,
+    description: "A second delivery pod, two enterprise AEs, and customer success for the live network.",
+  },
+  {
+    category: "Operations",
+    percentage: 15,
+    description: "Field trucks, spare compute, insurance, and Chicago / Dallas leases.",
+  },
+  {
+    category: "People",
+    percentage: 15,
+    description: "Perception, reliability, and implementation hiring gated on go-lives.",
+  },
+  {
+    category: "Reserve",
+    percentage: 5,
+    description: "Working-capital buffer. Not a second product.",
+  },
 ];
 
 export const DATAROOM_PLAN_CATEGORIES: readonly string[] = DEFAULT_USE_OF_FUNDS.map(
