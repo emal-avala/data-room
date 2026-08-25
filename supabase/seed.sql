@@ -1,4 +1,4 @@
--- Demo seed. Safe for a fresh project. Contains no real companies or people.
+-- Acme Corporation demo seed. Safe for a fresh project.
 -- Run after 001_schema.sql:  supabase db reset   (applies migrations + this file)
 
 INSERT INTO dataroom_variants (
@@ -7,15 +7,15 @@ INSERT INTO dataroom_variants (
 (
     'core',
     'Core room',
-    'Minimum diligence set for a first conversation.',
+    'Deck, memo, and financials for a first conversation.',
     500000000,
     FALSE,
     '[
-      {"category":"Product","percentage":40,"description":"Engineering and product."},
-      {"category":"Go-to-market","percentage":25,"description":"Sales and customer success."},
-      {"category":"Operations","percentage":15,"description":"G&A and infrastructure."},
-      {"category":"People","percentage":15,"description":"Hiring the next twelve months."},
-      {"category":"Reserve","percentage":5,"description":"Working-capital buffer."}
+      {"category":"Product","percentage":40,"description":"On-vehicle perception, multi-yard dispatch, snow mode, and the partner-tractor interface."},
+      {"category":"Go-to-market","percentage":25,"description":"A second delivery pod, two enterprise AEs, and customer success for the live network."},
+      {"category":"Operations","percentage":15,"description":"Field trucks, spare compute, insurance, and Chicago / Dallas leases."},
+      {"category":"People","percentage":15,"description":"Perception, reliability, and implementation hiring gated on go-lives."},
+      {"category":"Reserve","percentage":5,"description":"Working-capital buffer. Not a second product."}
     ]'::jsonb,
     TRUE,
     'active'
@@ -27,11 +27,11 @@ INSERT INTO dataroom_variants (
     1000000000,
     FALSE,
     '[
-      {"category":"Product","percentage":40,"description":"Engineering and product."},
-      {"category":"Go-to-market","percentage":25,"description":"Sales and customer success."},
-      {"category":"Operations","percentage":15,"description":"G&A and infrastructure."},
-      {"category":"People","percentage":15,"description":"Hiring the next twelve months."},
-      {"category":"Reserve","percentage":5,"description":"Working-capital buffer."}
+      {"category":"Product","percentage":40,"description":"On-vehicle perception, multi-yard dispatch, snow mode, and the partner-tractor interface."},
+      {"category":"Go-to-market","percentage":25,"description":"A second delivery pod, two enterprise AEs, and customer success for the live network."},
+      {"category":"Operations","percentage":15,"description":"Field trucks, spare compute, insurance, and Chicago / Dallas leases."},
+      {"category":"People","percentage":15,"description":"Perception, reliability, and implementation hiring gated on go-lives."},
+      {"category":"Reserve","percentage":5,"description":"Working-capital buffer. Not a second product."}
     ]'::jsonb,
     FALSE,
     'active'
@@ -54,13 +54,21 @@ FROM dataroom_variants
 CROSS JOIN (
     VALUES
         ('use-of-funds', 40),
-        ('cap-table', 50)
+        ('go-to-market', 50),
+        ('competitive-landscape', 60),
+        ('technical-architecture', 70),
+        ('case-studies', 80),
+        ('cap-table', 90)
 ) AS extra(slug, ord)
 WHERE dataroom_variants.slug = 'full';
 
 INSERT INTO tracked_documents (title, slug, type, settings) VALUES
-    ('Sample Pitch Deck', 'pitch-deck', 'deck', '{"require_nda": false}'::jsonb),
-    ('Sample Investment Memo', 'investment-memo', 'other', '{"require_nda": false}'::jsonb),
-    ('Sample Financial Overview', 'financial-overview', 'other', '{"require_nda": false}'::jsonb),
-    ('Sample Use of Funds', 'use-of-funds', 'other', '{"require_nda": false}'::jsonb),
-    ('Sample Cap Table', 'cap-table', 'pdf', '{"require_nda": true}'::jsonb);
+    ('Series A deck', 'pitch-deck', 'deck', '{"require_nda": false}'::jsonb),
+    ('Investment memo', 'investment-memo', 'other', '{"require_nda": false}'::jsonb),
+    ('Financial overview', 'financial-overview', 'other', '{"require_nda": false}'::jsonb),
+    ('Use of funds', 'use-of-funds', 'other', '{"require_nda": false}'::jsonb),
+    ('Go-to-market', 'go-to-market', 'other', '{"require_nda": false}'::jsonb),
+    ('Competitive landscape', 'competitive-landscape', 'other', '{"require_nda": false}'::jsonb),
+    ('Technical architecture', 'technical-architecture', 'other', '{"require_nda": false}'::jsonb),
+    ('Site notes', 'case-studies', 'other', '{"require_nda": false}'::jsonb),
+    ('Cap table', 'cap-table', 'other', '{"require_nda": true}'::jsonb);
