@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Example Co. · Series A</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <title>Acme Corporation · Series A</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -12,54 +11,89 @@
     <div class="banner">Static preview — no login. The production app on Vercel is gated.</div>
     <header class="header">
       <div class="header-inner">
-        <a class="brand" href="./index.html">Example Co.</a>
+        <a class="brand" href="./index.html">Acme Corporation <span class="muted">Series A</span></a>
         <nav class="nav">
           <a class="active" href="./index.html">Overview</a>
+          <a href="./roadmap.html">Roadmap</a>
+          <a href="./financials.html">Financials</a>
           <a href="./docs.html">Documents</a>
-          <a href="./admin.html">Admin</a>
+          <a href="./company.html">Company</a>
+          <a href="./contact.html">Contact</a>
         </nav>
       </div>
     </header>
     <section class="hero">
       <div class="hero-inner">
         <p class="eyebrow">Series A</p>
-        <h1>Example Co.</h1>
-        <p class="lede">The institutional data room for your round.</p>
+        <h1>Acme Corporation</h1>
+        <p class="lede">Acme runs the yard: perception, dispatch, and electric tractors that move trailers between the gate and the dock without a human in the cab.</p>
         <div class="actions">
           <a class="btn btn-primary" href="./docs.html">Open the data room</a>
-          <a class="btn btn-ghost" href="./deck.html">View the sample deck</a>
+          <a class="btn btn-ghost" href="./deck.html">View the deck</a>
         </div>
       </div>
     </section>
+    <div class="metrics-strip">
+      <div><div class="muted">Annualized run-rate</div><div class="metric">$9.72M</div><div class="muted">June 2026 × 12 · preliminary</div></div>
+      <div><div class="muted">TTM recognized</div><div class="metric">$6.72M</div><div class="muted">Q3 2025 – Q2 2026 · GAAP</div></div>
+      <div><div class="muted">Paying customers</div><div class="metric">14</div><div class="muted">31 live yards</div></div>
+      <div><div class="muted">Net income — May 2026</div><div class="metric">$42K</div><div class="muted">First profitable month</div></div>
+    </div>
     <div class="wrap">
-      <p class="eyebrow">Snapshot</p>
-      <h2>Headline figures</h2>
-      <p class="muted">Fill these from your books in <code>src/app/page.tsx</code>.</p>
-      <div class="grid grid-4" style="margin-top: 1.5rem">
-        <div class="card"><div class="muted">Replace this metric</div><div class="metric">—</div></div>
-        <div class="card"><div class="muted">Paying customers</div><div class="metric">—</div></div>
-        <div class="card"><div class="muted">Team</div><div class="metric">—</div></div>
-        <div class="card"><div class="muted">Round</div><div class="metric">Series A</div></div>
+      <p class="eyebrow">Why now</p>
+      <h2>The bottleneck moved outside the building</h2>
+      <div class="grid grid-3" style="margin-top: 1.5rem">
+        <div class="card"><h3>The yard is still analog</h3><p class="muted">Inside, a WMS knows every tote. Outside, a lead spotter works a radio and a whiteboard.</p></div>
+        <div class="card"><h3>The geometry repeats</h3><p class="muted">Painted lines, the same fifty trailers. Learned autonomy holds here first.</p></div>
+        <div class="card"><h3>Software on the fleet they own</h3><p class="muted">The electric tractor is optional and is not on our balance sheet.</p></div>
+      </div>
+      <div class="section">
+        <p class="eyebrow">Traction</p>
+        <h2>Recognized revenue</h2>
+        <p class="muted">Q1 2025 through Q2 2026. Pipeline is not in this chart.</p>
+        <div class="bars" aria-hidden="true">
+          <span style="height:30%"></span>
+          <span style="height:38%"></span>
+          <span style="height:50%"></span>
+          <span style="height:69%"></span>
+          <span style="height:81%"></span>
+          <span style="height:100%"></span>
+        </div>
+      </div>
+      <div class="section">
+        <p class="eyebrow">Network</p>
+        <h2>14 contracted customers · 31 live yards</h2>
+        <table>
+          <thead><tr><th>Account</th><th>Segment</th><th>Sites</th><th>Since</th></tr></thead>
+          <tbody>
+            <tr><td>Northstar Logistics</td><td>3PL</td><td>6</td><td>2024</td></tr>
+            <tr><td>Meridian Grocers</td><td>Grocery DC</td><td>4</td><td>2024</td></tr>
+            <tr><td>Harborline Terminals</td><td>Port yard</td><td>3</td><td>2025</td></tr>
+            <tr><td>Redwood Cold Chain</td><td>Cold storage</td><td>3</td><td>2025</td></tr>
+            <tr><td>Prairie Pack</td><td>CPG</td><td>2</td><td>2025</td></tr>
+            <tr><td>Westfork Apparel</td><td>Retail DC</td><td>2</td><td>2025</td></tr>
+            <tr><td>Keystone Parcel</td><td>Parcel sort</td><td>2</td><td>2026</td></tr>
+            <tr><td>Ironwood Building Materials</td><td>Building products</td><td>2</td><td>2026</td></tr>
+            <tr><td>Oakridge Pharma Logistics</td><td>Pharma 3PL</td><td>2</td><td>2026</td></tr>
+            <tr><td>Lakeside Beverage</td><td>Beverage DC</td><td>1</td><td>2026</td></tr>
+            <tr><td>Summit Paper</td><td>Pulp &amp; paper</td><td>1</td><td>2026</td></tr>
+            <tr><td>Cinderland Steel</td><td>Metals</td><td>1</td><td>2026</td></tr>
+            <tr><td>Bluebarn Produce</td><td>Wholesale produce</td><td>1</td><td>2026</td></tr>
+            <tr><td>Flatland Grain</td><td>Ag export</td><td>1</td><td>2026</td></tr>
+          </tbody>
+        </table>
       </div>
       <div class="section">
         <p class="eyebrow">Diligence</p>
         <h2>Start here</h2>
         <div class="grid grid-2" style="margin-top: 1.5rem">
-          <a class="card" href="./deck.html">
-            <p class="eyebrow">Overview</p>
-            <h3>Sample Pitch Deck</h3>
-            <p class="muted">Five-slide placeholder. Replace the HTML in content/documents/.</p>
-          </a>
-          <a class="card" href="./memo.html">
-            <p class="eyebrow">Overview</p>
-            <h3>Sample Investment Memo</h3>
-            <p class="muted">One-page memo template.</p>
-          </a>
+          <a class="card" href="./deck.html"><p class="eyebrow">Overview</p><h3>Series A deck</h3><p class="muted">Ten-slide story.</p></a>
+          <a class="card" href="./memo.html"><p class="eyebrow">Overview</p><h3>Investment memo</h3><p class="muted">Thesis, buyer, ledger, risks.</p></a>
+          <a class="card" href="./financials.html"><p class="eyebrow">Financials</p><h3>The books</h3><p class="muted">Quarterly recognized and pipeline kept separate.</p></a>
+          <a class="card" href="./docs.html"><p class="eyebrow">Room</p><h3>All documents</h3><p class="muted">Core plus full-diligence set.</p></a>
         </div>
       </div>
     </div>
-    <footer class="footer">
-      Data Room · <a href="https://github.com/emal-avala/data-room">github.com/emal-avala/data-room</a>
-    </footer>
+    <footer class="footer">Confidential · Acme Corporation · <a href="https://github.com/emal-avala/data-room">Source</a></footer>
   </body>
 </html>
