@@ -3,20 +3,22 @@
 `demo/` is a static copy of the homepage, document list, memo, deck, and
 admin overview. No auth. No API.
 
-URL after the first successful deploy:
-`https://<owner>.github.io/data-room/`
+URL: `https://<owner>.github.io/data-room/`
 
-## Enable once
+## How it publishes
 
-1. Repo **Settings → Pages**.
-2. Build and deployment → Source: **GitHub Actions**.
-3. Actions → **Pages** → Run workflow (or push to `main`).
+`.github/workflows/pages.yml` copies `demo/` onto the `gh-pages` branch
+when `demo/` or the workflow file changes on `main` (or when you run the
+workflow by hand).
 
-The workflow is `.github/workflows/pages.yml`. It uploads the `demo/`
-folder.
+GitHub Actions cannot create the Pages site. The site is served from
+**Deploy from a branch** → `gh-pages` / `/`.
 
-A GitHub App token cannot flip that Settings switch. Someone with
-admin on the repo does it once.
+If the live URL 404s after a fork:
+
+1. Run the **Pages** workflow so `gh-pages` exists.
+2. Repo **Settings → Pages → Source: Deploy from a branch**.
+3. Branch: **gh-pages** / **/** (root). Save.
 
 ## After a UI change
 
