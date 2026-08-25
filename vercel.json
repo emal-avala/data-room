@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "bun run build",
+  "regions": ["iad1"],
+  "crons": [
+    {
+      "path": "/api/analytics/digest",
+      "schedule": "0 14 * * 1"
+    }
+  ]
+}

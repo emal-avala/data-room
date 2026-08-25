@@ -1,0 +1,11 @@
+name: Bug report
+description: Something in the skeleton is wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Steps, expected, actual. No real investor emails or documents.
+    validations:
+      required: true
