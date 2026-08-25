@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Forecast · Acme Corporation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <a class="brand" href="./index.html">Acme Corporation</a>
+        <nav class="nav">
+          <a href="./financials.html">Overview</a>
+          <a href="./pnl.html">P&amp;L</a>
+          <a class="active" href="./forecast.html">Forecast</a>
+          <a href="./pipeline.html">Pipeline</a>
+          <a href="./revenue.html">By customer</a>
+        </nav>
+      </div>
+    </header>
+    <div class="wrap">
+      <p class="eyebrow">Financials</p>
+      <h1 style="font-size: 2rem">Three-scenario forecast</h1>
+      <p class="lede">H1 2025 through H1 2026 are actuals. Everything after Q2 2026 is a plan.</p>
+      <div class="grid grid-3" style="margin-top: 2rem">
+        <div class="card"><p class="eyebrow">Conservative</p><div class="metric">$8.46M</div><p class="muted">FY 2026 · $11.2M FY 2027. No new logos after legal-stage deals.</p></div>
+        <div class="card"><p class="eyebrow">Base</p><div class="metric">$9.66M</div><p class="muted">FY 2026 · $16.6M FY 2027. Second delivery pod in Q4 2026.</p></div>
+        <div class="card"><p class="eyebrow">Optimistic</p><div class="metric">$11.3M</div><p class="muted">FY 2026 · $23.2M FY 2027. Two more ports convert.</p></div>
+      </div>
+      <table>
+        <thead><tr><th>Period</th><th>Kind</th><th>Conservative</th><th>Base</th><th>Optimistic</th></tr></thead>
+        <tbody>
+          <tr><td>H1 2025</td><td>Actual</td><td>$1,520,000</td><td>$1,520,000</td><td>$1,520,000</td></tr>
+          <tr><td>H2 2025</td><td>Actual</td><td>$2,660,000</td><td>$2,660,000</td><td>$2,660,000</td></tr>
+          <tr><td>H1 2026</td><td>Actual</td><td>$4,060,000</td><td>$4,060,000</td><td>$4,060,000</td></tr>
+          <tr><td>H2 2026</td><td>Forecast</td><td>$4,400,000</td><td>$5,600,000</td><td>$7,200,000</td></tr>
+          <tr><td>H1 2027</td><td>Forecast</td><td>$5,200,000</td><td>$7,400,000</td><td>$10,000,000</td></tr>
+          <tr><td>H2 2027</td><td>Forecast</td><td>$6,000,000</td><td>$9,200,000</td><td>$13,200,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="footer"><a href="./financials.html">Financials hub</a></footer>
+  </body>
+</html>
