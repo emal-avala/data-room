@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "echo skip",
+  "buildCommand": "echo static",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/docs", "destination": "/docs.html" },
+    { "source": "/docs/pitch-deck", "destination": "/deck.html" },
+    { "source": "/docs/investment-memo", "destination": "/memo.html" },
+    { "source": "/docs/financial-overview", "destination": "/financial-overview.html" },
+    { "source": "/docs/use-of-funds", "destination": "/funds.html" },
+    { "source": "/docs/go-to-market", "destination": "/gtm.html" },
+    { "source": "/docs/competitive-landscape", "destination": "/competitive.html" },
+    { "source": "/docs/technical-architecture", "destination": "/architecture.html" },
+    { "source": "/docs/case-studies", "destination": "/sites.html" },
+    { "source": "/docs/cap-table", "destination": "/captable.html" },
+    { "source": "/roadmap", "destination": "/roadmap.html" },
+    { "source": "/financials", "destination": "/financials.html" },
+    { "source": "/financials/pnl", "destination": "/pnl.html" },
+    { "source": "/financials/forecast", "destination": "/forecast.html" },
+    { "source": "/financials/pipeline", "destination": "/pipeline.html" },
+    { "source": "/financials/revenue-by-customer", "destination": "/revenue.html" },
+    { "source": "/company", "destination": "/company.html" },
+    { "source": "/contact", "destination": "/contact.html" }
+  ]
+}
