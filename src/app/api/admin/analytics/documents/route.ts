@@ -1,23 +1,28 @@
 import { NextResponse } from "next/server";
-import { getAdminSupabase } from "../../_shared";
+import { DEMO_DOCUMENTS } from "@/lib/analytics/demo-data";
+import { getAdminSupabase, jsonDemo } from "../../_shared";
 
 export async function GET() {
-  const { supabase, error } = await getAdminSupabase();
+  const { supabase, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ documents: DEMO_DOCUMENTS });
   const { data } = await supabase
     .from("document_views")
-    .select("document_id, tracked_documents(slug)");
-  const counts = new Map<string, number>();
+    .select("document_id, tracked_documents(slug, title)");
+  const counts = new Map<string, { slug: string; title: string; views: number }>();
   for (const row of data ?? []) {
     const tracked = row.tracked_documents as unknown as
-      | { slug?: string }
-      | { slug?: string }[]
+      | { slug?: string; title?: string }
+      | { slug?: string; title?: string }[]
       | null;
-    const slug = Array.isArray(tracked) ? tracked[0]?.slug : tracked?.slug;
+    const doc = Array.isArray(tracked) ? tracked[0] : tracked;
+    const slug = doc?.slug;
     if (!slug) continue;
-    counts.set(slug, (counts.get(slug) ?? 0) + 1);
+    const current = counts.get(slug) ?? { slug, title: doc?.title ?? slug, views: 0 };
+    current.views += 1;
+    counts.set(slug, current);
   }
   return NextResponse.json({
-    documents: [...counts.entries()].map(([slug, views]) => ({ slug, views })),
+    documents: [...counts.values()].sort((a, b) => b.views - a.views),
   });
 }

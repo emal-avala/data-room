@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { getAdminSupabase } from "../../_shared";
+import { getDemoTimeseries } from "@/lib/analytics/demo-data";
+import { getAdminSupabase, jsonDemo } from "../../_shared";
 
 export async function GET() {
-  const { supabase, error } = await getAdminSupabase();
+  const { supabase, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ points: getDemoTimeseries() });
 
   const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
   const { data } = await supabase

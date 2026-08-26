@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
-import { getAdminSupabase } from "../_shared";
+import { getDemoAdmins } from "@/lib/analytics/demo-data";
 import { getSuperadminEmail, normalizeAdminEmail } from "@/lib/admin-emails";
+import { getAdminSupabase, jsonDemo } from "../_shared";
 
 export async function GET() {
-  const { supabase, error } = await getAdminSupabase();
+  const { supabase, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ admins: getDemoAdmins() });
   const { data } = await supabase.from("admin_users").select("email");
   const emails = new Set((data ?? []).map((row) => row.email));
   emails.add(getSuperadminEmail());
@@ -12,8 +14,9 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { supabase, actorIsSuperadmin, error } = await getAdminSupabase();
+  const { supabase, actorIsSuperadmin, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ ok: true });
   if (!actorIsSuperadmin) {
     return NextResponse.json({ error: "Only the owner can add admins" }, { status: 403 });
   }
@@ -25,8 +28,9 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const { supabase, actorIsSuperadmin, error } = await getAdminSupabase();
+  const { supabase, actorIsSuperadmin, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ ok: true });
   if (!actorIsSuperadmin) {
     return NextResponse.json({ error: "Only the owner can remove admins" }, { status: 403 });
   }

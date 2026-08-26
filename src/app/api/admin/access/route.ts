@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { getAdminSupabase } from "../_shared";
+import { DEMO_ACCESS_REQUESTS } from "@/lib/analytics/demo-data";
+import { getAdminSupabase, jsonDemo } from "../_shared";
 
 export async function GET() {
-  const { supabase, error } = await getAdminSupabase();
+  const { supabase, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ requests: DEMO_ACCESS_REQUESTS });
   const { data } = await supabase
     .from("access_requests")
     .select("id, email, status, requested_at, requested_path")
@@ -12,12 +14,13 @@ export async function GET() {
 }
 
 export async function PATCH(request: Request) {
-  const { supabase, actorEmail, error } = await getAdminSupabase();
+  const { supabase, actorEmail, demo, error } = await getAdminSupabase();
   if (error) return error;
   const body = (await request.json()) as { id?: string; status?: string };
   if (!body.id || (body.status !== "approved" && body.status !== "rejected")) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
+  if (demo) return jsonDemo({ ok: true });
   await supabase
     .from("access_requests")
     .update({

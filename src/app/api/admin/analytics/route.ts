@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { getAdminSupabase } from "../_shared";
+import { getDemoAnalyticsSummary } from "@/lib/analytics/demo-data";
+import { getAdminSupabase, jsonDemo } from "../_shared";
 
 export async function GET() {
-  const { supabase, error } = await getAdminSupabase();
+  const { supabase, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ ...getDemoAnalyticsSummary() });
 
   const [{ count: views }, { count: viewers }, { count: docs }] = await Promise.all([
     supabase.from("document_views").select("id", { count: "exact", head: true }),
