@@ -24,7 +24,7 @@
   --chrome-bg:#101010; --chrome-rail:#0A0A0A; --chrome-fg:#FFFFFF; --chrome-dim:rgba(255,255,255,.62); --chrome-line:rgba(255,255,255,.14);
   --face:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
 }
-html,body{margin:0;padding:0;background:#000;font-family:var(--face);-webkit-font-smoothing:antialiased;overflow:hidden;}
+html,body{margin:0;padding:0;background:#000;font-family:var(--face);-webkit-font-smoothing:antialiased;overflow:hidden;-webkit-user-select:none;user-select:none;}
 *{box-sizing:border-box;}
 #deck-stage h1,#deck-stage h2{font-weight:300;}
 [data-slide][data-chapter]::before{
@@ -524,7 +524,13 @@ a{color:var(--accent);text-decoration:none;}
     }
   });
 
+  function blockCopy(e) { e.preventDefault(); }
+  document.addEventListener('copy', blockCopy);
+  document.addEventListener('cut', blockCopy);
+  document.addEventListener('contextmenu', blockCopy);
+  document.addEventListener('dragstart', blockCopy);
   window.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && 'cxaspu'.indexOf(String(e.key||'').toLowerCase()) !== -1) e.preventDefault();
     var k = e.key;
     if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { e.preventDefault(); go(state.i + 1); }
     else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); go(state.i - 1); }
