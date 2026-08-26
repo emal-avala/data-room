@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in · Acme Corporation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./protect.js" defer></script>
+  </head>
+  <body>
+    <div class="banner">Example sign-in. Authentication is mocked for this demo — no Google or Microsoft account is contacted.</div>
+    <div class="login-page">
+      <p class="login-kicker">Acme Corporation · Series A</p>
+      <div class="login-card">
+        <div id="login-providers">
+          <p class="eyebrow">Secure channel</p>
+          <h1 class="login-title">Sign in</h1>
+          <p class="muted">Approved investors only. Use the account you were invited with.</p>
+          <div class="login-actions">
+            <button type="button" class="btn btn-primary login-btn" data-provider="Google">Continue with Google</button>
+            <button type="button" class="btn btn-ghost login-btn" data-provider="Microsoft">Continue with Microsoft</button>
+          </div>
+        </div>
+        <div id="login-signing" class="login-status" hidden>
+          <p class="eyebrow">Redirecting</p>
+          <p id="login-signing-copy" class="muted">Signing in…</p>
+        </div>
+        <div id="login-verified" class="login-status" hidden>
+          <p class="eyebrow">Identity verified</p>
+          <p>demo@example.com</p>
+          <a class="btn btn-primary" href="./docs.html">Enter the data room</a>
+        </div>
+        <p class="login-disclaimer">Example sign-in. Authentication is mocked for this demo — no Google or Microsoft account is contacted.</p>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var providers = document.getElementById("login-providers");
+        var signing = document.getElementById("login-signing");
+        var verified = document.getElementById("login-verified");
+        var copy = document.getElementById("login-signing-copy");
+        document.querySelectorAll("[data-provider]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            var provider = button.getAttribute("data-provider") || "Google";
+            providers.hidden = true;
+            copy.textContent = "Signing in with " + provider + "…";
+            signing.hidden = false;
+            window.setTimeout(function () {
+              signing.hidden = true;
+              verified.hidden = false;
+            }, 900);
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

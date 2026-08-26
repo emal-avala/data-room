@@ -53,6 +53,9 @@ export function Header() {
           <Link href="/admin" className="text-sm text-muted-foreground hover:text-foreground">
             Admin
           </Link>
+          <Link href="/login" className="text-sm font-medium text-primary">
+            Sign in
+          </Link>
         </nav>
         <button
           type="button"
@@ -75,6 +78,9 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <Link href="/login" className="block py-2 text-sm font-medium text-primary" onClick={() => setOpen(false)}>
+            Sign in
+          </Link>
         </nav>
       ) : null}
     </header>

@@ -15,6 +15,7 @@ Next.js App Router. Tailwind v4. Bun.
 | `lib/documents.ts` | Registry |
 | `lib/dataroom-variants.ts` | **Server-only** room allowlists |
 | `lib/next-path.ts` | Same-origin `next=` |
+| `lib/auth-demo.ts` | Mock `/login` copy + `demo@example.com` when Supabase is missing |
 | `middleware.ts` | Session + approval |
 | `utils/supabase/` | SSR clients. Placeholders in `.env.example` are not a live project |
 

@@ -1,6 +1,8 @@
 # demo/
 
-Static GitHub Pages preview of the Acme Corporation example. No auth, no API.
+Static GitHub Pages preview of the Acme Corporation example. No live
+API. `/login` is a mocked Google/Microsoft walkthrough
+(`demo/login.html`) — same disclaimer string as `MOCK_AUTH_DISCLAIMER`.
 
 Published at `https://emal-avala.github.io/data-room/` by
 `.github/workflows/pages.yml`.
@@ -13,6 +15,7 @@ Published at `https://emal-avala.github.io/data-room/` by
 | `docs.html` | `/docs` |
 | `company.html` | `/company` |
 | `contact.html` | `/contact` |
+| `login.html` | `/login` — mock sign-in; keep the disclaimer identical to `MOCK_AUTH_DISCLAIMER` |
 | `memo.html` | `/docs/investment-memo` |
 | `deck.html` | `/docs/pitch-deck` — must stay identical to `content/documents/sample-pitch-deck.html` |
 | `financial-overview.html` | `/docs/financial-overview` |

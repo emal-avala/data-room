@@ -87,7 +87,7 @@ Full checklist: [docs/guides/add-document.md](docs/guides/add-document.md).
 
 | | Localhost | Vercel without Supabase | Vercel + Supabase | GitHub Pages (`demo/`) |
 |--|-----------|-------------------------|-------------------|------------------------|
-| Auth | Off (staff bypass) | Off (public sample room) | On | None (static HTML) |
+| Auth | Off (staff bypass) | Mock Google/Microsoft walkthrough | On | Mock static `/login` |
 | Database | Optional | None | Required | None |
 | `/docs/[slug]` | Full room | Full sample room, no staff bypass | Session + variant | Static HTML rewrite |
 | `/admin` | Full console | Sample analytics (invented firms) | Session + DB | Static HTML |
@@ -104,6 +104,13 @@ That is the sample IR analytics walkthrough (invented firms,
 configured" there, and do not put real fund names in the demo rows.
 Demo viewer emails must stay off `@acme.example` or `internal-notes`
 leaks.
+
+Production without Supabase must **not** dump “set the keys in
+`.env.local`” on `/login`. That page is the public IR sign-in
+walkthrough: same Google / Microsoft chrome, `MOCK_AUTH_DISCLAIMER`
+from `src/lib/auth-demo.ts`, no OAuth call. Encoded there — do not
+restore the empty developer state. The mock viewer is
+`demo@example.com`, never `@acme.example`.
 
 Copy deterrent: `ContentProtection` plus `user-select: none` on the
 public site (investor-site contract — selection, copy/cut, context

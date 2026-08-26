@@ -48,6 +48,12 @@ export default function HomePage() {
             >
               View the deck
             </Link>
+            <Link
+              href="/login"
+              className="inline-flex h-11 items-center rounded-md border border-border px-6 text-sm"
+            >
+              Sign in
+            </Link>
           </div>
         </div>
       </section>

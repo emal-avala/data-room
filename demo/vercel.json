@@ -23,6 +23,7 @@
     { "source": "/financials/pipeline", "destination": "/pipeline.html" },
     { "source": "/financials/revenue-by-customer", "destination": "/revenue.html" },
     { "source": "/company", "destination": "/company.html" },
-    { "source": "/contact", "destination": "/contact.html" }
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/login", "destination": "/login.html" }
   ]
 }

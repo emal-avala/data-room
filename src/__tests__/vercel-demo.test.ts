@@ -32,5 +32,6 @@ describe("gh-pages Vercel static contract", () => {
     expect(bySource["/docs/technical-architecture"]).toBe("/architecture.html");
     expect(bySource["/docs/case-studies"]).toBe("/sites.html");
     expect(bySource["/docs/cap-table"]).toBe("/captable.html");
+    expect(bySource["/login"]).toBe("/login.html");
   });
 });
