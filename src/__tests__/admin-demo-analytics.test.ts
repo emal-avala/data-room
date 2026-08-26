@@ -80,6 +80,15 @@ describe("unconfigured admin contract", () => {
     expect(layout).toContain("isAdminBackendConfigured");
     expect(layout).toContain("sample");
   });
+
+  it("gives chart columns a real height so percentage bars render", () => {
+    const chart = readFileSync(
+      path.join(process.cwd(), "src/app/admin/components/ViewsChart.tsx"),
+      "utf8",
+    );
+    expect(chart).toContain("h-36");
+    expect(chart).toContain("h-full");
+  });
 });
 
 describe("static admin walkthrough", () => {

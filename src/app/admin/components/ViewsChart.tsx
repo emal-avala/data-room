@@ -22,7 +22,7 @@ export function ViewsChart({ points }: { points: TimeseriesPoint[] }) {
           return (
             <div
               key={point.date}
-              className="flex min-w-0 flex-1 flex-col justify-end"
+              className="flex h-full min-w-0 flex-1 flex-col justify-end"
               title={`${point.date}: ${point.doc_views} document, ${point.site_views} site`}
             >
               <div
