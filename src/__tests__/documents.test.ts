@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { DOCUMENTS, SELECTABLE_DOCUMENT_SLUGS, getDocumentBySlug } from "@/lib/documents";
 
 describe("document registry", () => {
@@ -22,5 +24,12 @@ describe("document registry", () => {
       expect(SELECTABLE_DOCUMENT_SLUGS.has(doc.slug)).toBe(true);
       expect(getDocumentBySlug(doc.slug)?.name).toBe(doc.name);
     }
+  });
+
+  it("traces on-disk documents into the Vercel deck and file functions", () => {
+    const config = readFileSync(resolve(process.cwd(), "next.config.ts"), "utf8");
+    expect(config).toContain("outputFileTracingIncludes");
+    expect(config).toContain("/api/docs/[slug]/deck");
+    expect(config).toContain("./content/documents/**/*");
   });
 });

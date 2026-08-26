@@ -60,7 +60,9 @@ Missing any step hides the file or locks every room that names it.
 2. That route's `layout.tsx` must `export const dynamic = "force-dynamic"`
    and `await requireDataRoomDocument("<slug>")`.
 3. Register in `src/lib/documents.ts`. HTML/PDF `fileUrl` points at
-   `content/documents/…` — **not** `public/`. `version: 1`.
+   `content/documents/…` — **not** `public/`. `version: 1`. Keep
+   `outputFileTracingIncludes` in `next.config.ts` pointed at that
+   folder or Vercel 500s the deck/file APIs.
 4. Add the slug to `CORE_DOCUMENTS` or `FULL_ONLY_DOCUMENTS` in
    `src/lib/dataroom-variants.ts`.
 5. Same commit: update the pinned counts in

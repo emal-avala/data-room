@@ -19,6 +19,12 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Serverless traces do not pick up readFile() targets. Without this,
+  // /api/docs/[slug]/deck 500s on Vercel (ENOENT for sample-pitch-deck.html).
+  outputFileTracingIncludes: {
+    "/api/docs/[slug]/deck": ["./content/documents/**/*"],
+    "/api/docs/[slug]/file": ["./content/documents/**/*"],
+  },
   // Chunk provenance requires webpack. --webpack is passed by the npm scripts;
   // this empty block silences Next 16's Turbopack-default warning if someone
   // runs `next dev` bare.
