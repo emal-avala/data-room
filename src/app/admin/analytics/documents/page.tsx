@@ -2,8 +2,16 @@
 
 import { useEffect, useState } from "react";
 
+type DocRow = {
+  slug: string;
+  title?: string;
+  views: number;
+  unique_viewers?: number;
+  avg_seconds?: number;
+};
+
 export default function DocumentsAnalyticsPage() {
-  const [rows, setRows] = useState<Array<{ slug: string; views: number }>>([]);
+  const [rows, setRows] = useState<DocRow[]>([]);
   useEffect(() => {
     void fetch("/api/admin/analytics/documents")
       .then((r) => r.json())
@@ -11,19 +19,44 @@ export default function DocumentsAnalyticsPage() {
   }, []);
   return (
     <div>
+      <p className="text-eyebrow">Analytics</p>
       <h1 className="text-2xl font-semibold">Document performance</h1>
-      <ul className="mt-6 container-box divide-y divide-border">
-        {rows.length === 0 ? (
-          <li className="p-6 text-sm text-muted-foreground">No document views.</li>
-        ) : (
-          rows.map((row) => (
-            <li key={row.slug} className="flex justify-between p-4 text-sm">
-              <span>{row.slug}</span>
-              <span>{row.views}</span>
-            </li>
-          ))
-        )}
-      </ul>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Which diligence files partners actually open.
+      </p>
+      <table className="mt-6 container-box">
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Views</th>
+            <th>Viewers</th>
+            <th>Avg time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.length === 0 ? (
+            <tr>
+              <td colSpan={4} className="p-6 text-sm text-muted-foreground">
+                No document views.
+              </td>
+            </tr>
+          ) : (
+            rows.map((row) => (
+              <tr key={row.slug}>
+                <td>
+                  <span className="font-medium">{row.title ?? row.slug}</span>
+                  <span className="ml-2 text-xs text-muted-foreground">{row.slug}</span>
+                </td>
+                <td>{row.views}</td>
+                <td className="text-muted-foreground">{row.unique_viewers ?? "—"}</td>
+                <td className="text-muted-foreground">
+                  {row.avg_seconds != null ? `${Math.round(row.avg_seconds / 60)} min` : "—"}
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }

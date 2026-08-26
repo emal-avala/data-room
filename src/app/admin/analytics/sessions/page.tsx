@@ -1,9 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+
+type SessionRow = {
+  id: string;
+  email: string;
+  firm?: string | null;
+  path: string;
+  started_at?: string;
+  ended_at?: string | null;
+  viewer_id?: string;
+};
 
 export default function SessionsPage() {
-  const [rows, setRows] = useState<Array<{ id: string; email: string; path: string }>>([]);
+  const [rows, setRows] = useState<SessionRow[]>([]);
   useEffect(() => {
     void fetch("/api/admin/analytics/sessions")
       .then((r) => r.json())
@@ -11,18 +22,47 @@ export default function SessionsPage() {
   }, []);
   return (
     <div>
+      <p className="text-eyebrow">Analytics</p>
       <h1 className="text-2xl font-semibold">Sessions</h1>
-      <ul className="mt-6 container-box divide-y divide-border">
-        {rows.length === 0 ? (
-          <li className="p-6 text-sm text-muted-foreground">No sessions.</li>
-        ) : (
-          rows.map((row) => (
-            <li key={row.id} className="p-4 text-sm">
-              {row.email} · {row.path}
-            </li>
-          ))
-        )}
-      </ul>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Active and recent room visits. Live rows have no end time.
+      </p>
+      <table className="mt-6 container-box">
+        <thead>
+          <tr>
+            <th>Viewer</th>
+            <th>Firm</th>
+            <th>Path</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.length === 0 ? (
+            <tr>
+              <td colSpan={4} className="p-6 text-sm text-muted-foreground">
+                No sessions.
+              </td>
+            </tr>
+          ) : (
+            rows.map((row) => (
+              <tr key={row.id}>
+                <td>
+                  {row.viewer_id ? (
+                    <Link href={`/admin/viewers/${row.viewer_id}`} className="hover:text-primary">
+                      {row.email}
+                    </Link>
+                  ) : (
+                    row.email
+                  )}
+                </td>
+                <td className="text-muted-foreground">{row.firm ?? "—"}</td>
+                <td>{row.path}</td>
+                <td className="text-muted-foreground">{row.ended_at ? "Ended" : "Live"}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }
