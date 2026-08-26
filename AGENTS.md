@@ -90,7 +90,7 @@ Full checklist: [docs/guides/add-document.md](docs/guides/add-document.md).
 | Auth | Off (staff bypass) | Off (public sample room) | On | None (static HTML) |
 | Database | Optional | None | Required | None |
 | `/docs/[slug]` | Full room | Full sample room, no staff bypass | Session + variant | Static HTML rewrite |
-| `/admin` | Full console | Sample analytics + well-known funds | Session + DB | Static HTML |
+| `/admin` | Full console | Sample analytics (invented firms) | Session + DB | Static HTML |
 | Edit | `src/` | `src/` | `src/` | `demo/*.html` |
 
 Production without Supabase must **not** 404 document pages. That is the
@@ -98,11 +98,17 @@ public Acme walkthrough at `*.vercel.app/docs/pitch-deck`. Encoded in
 `unconfiguredDataRoomAccess()` — do not restore "fail closed" there.
 
 Production without Supabase must **not** 503 `/admin` or `/api/admin/*`.
-That is the sample IR analytics walkthrough (Sequoia, a16z, and other
-well-known firms as fictional `*.example` traffic). Encoded in
-`isAdminBackendConfigured()` + `src/lib/analytics/demo-data.ts` — do not
-restore "Database not configured" there. Demo viewer emails must stay
-off `@acme.example` or `internal-notes` leaks.
+That is the sample IR analytics walkthrough (invented firms,
+`*.example` emails). Encoded in `isAdminBackendConfigured()` +
+`src/lib/analytics/demo-data.ts` — do not restore "Database not
+configured" there, and do not put real fund names in the demo rows.
+Demo viewer emails must stay off `@acme.example` or `internal-notes`
+leaks.
+
+Copy deterrent: `ContentProtection` plus `user-select: none` on the
+public site (investor-site contract — selection, copy/cut, context
+menu, drag, Ctrl/Cmd C/X/A/S/P/U). `/admin` is exempt. Do not weaken
+it on document pages.
 
 If you change homepage / docs / admin layout, update `demo/` to match.
 `demo/deck.html` must stay byte-identical to

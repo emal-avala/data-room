@@ -39,6 +39,22 @@ body {
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.5;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+[data-allow-copy],
+[data-allow-copy] * {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .text-eyebrow {

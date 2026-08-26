@@ -81,8 +81,8 @@ The weekly digest (`/api/analytics/digest`) is a Vercel Cron. It and
    → service role
 4. Actor email is returned separately; the service-role JWT is not the user
 
-Demo fund names are well-known firms. Demo emails are `*.example` and
-must not use the company domain.
+Demo fund names are invented firms. Demo emails are `*.example` and
+must not use the company domain or real venture-firm names.
 
 ## Chunk gating
 

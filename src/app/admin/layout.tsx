@@ -18,8 +18,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const sample = !isAdminBackendConfigured();
   if (sample || (await isLocalhost())) {
     return (
-      <div className="min-h-screen bg-muted/40">
-        <AdminChrome sample={sample}>{children}</AdminChrome>
+      <div className="min-h-screen bg-muted/40" data-allow-copy>
+        <AdminChrome>{children}</AdminChrome>
       </div>
     );
   }
@@ -36,27 +36,15 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="min-h-screen bg-muted/40">
+    <div className="min-h-screen bg-muted/40" data-allow-copy>
       <AdminChrome>{children}</AdminChrome>
     </div>
   );
 }
 
-function AdminChrome({
-  children,
-  sample = false,
-}: {
-  children: React.ReactNode;
-  sample?: boolean;
-}) {
+function AdminChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
-      {sample ? (
-        <div className="border-b border-border bg-background px-4 py-2 text-center text-sm text-muted-foreground">
-          Sample IR analytics. Well-known firms are fictional walkthrough traffic, not live
-          investors.
-        </div>
-      ) : null}
       <header className="border-b border-border bg-background">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Link href="/admin" className="text-sm font-semibold">

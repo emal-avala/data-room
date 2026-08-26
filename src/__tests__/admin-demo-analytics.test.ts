@@ -9,10 +9,10 @@ import {
   DEMO_DOCUMENTS,
   DEMO_EVENTS,
   DEMO_FUNDS,
+  DEMO_FUND_NAMES,
   DEMO_PAGES,
   DEMO_SESSIONS,
   DEMO_VIEWERS,
-  WELL_KNOWN_DEMO_FUND_NAMES,
   getDemoAnalyticsSummary,
   getDemoPipeline,
   getDemoTimeseries,
@@ -20,10 +20,29 @@ import {
   isDemoAnalyticsEmail,
 } from "@/lib/analytics/demo-data";
 
+const REAL_FIRM_MARKERS = [
+  "Sequoia",
+  "Andreessen",
+  "a16z",
+  "Benchmark",
+  "Accel",
+  "Greylock",
+  "Founders Fund",
+  "Lightspeed",
+  "Kleiner Perkins",
+  "Index Ventures",
+  "Bessemer",
+  "General Catalyst",
+  "Insight Partners",
+  "Thrive Capital",
+  "Tiger Global",
+  "SoftBank",
+];
+
 describe("admin demo analytics dataset", () => {
-  it("includes well-known funds across the raise pipeline", () => {
+  it("uses invented firms across the raise pipeline", () => {
     const names = DEMO_FUNDS.map((fund) => fund.name);
-    for (const name of WELL_KNOWN_DEMO_FUND_NAMES) {
+    for (const name of DEMO_FUND_NAMES) {
       expect(names).toContain(name);
     }
     const stages = new Set(DEMO_FUNDS.map((fund) => fund.stage));
@@ -32,6 +51,19 @@ describe("admin demo analytics dataset", () => {
     expect(stages.has("diligence")).toBe(true);
     expect(stages.has("term_sheet")).toBe(true);
     expect(stages.has("passed")).toBe(true);
+  });
+
+  it("does not name real venture firms", () => {
+    const blob = [
+      readFileSync(path.join(process.cwd(), "src/lib/analytics/demo-data.ts"), "utf8"),
+      readFileSync(path.join(process.cwd(), "demo/admin.html"), "utf8"),
+      readFileSync(path.join(process.cwd(), "src/app/admin/layout.tsx"), "utf8"),
+    ].join("\n");
+    for (const marker of REAL_FIRM_MARKERS) {
+      expect(blob, marker).not.toContain(marker);
+    }
+    expect(blob).not.toContain("Well-known");
+    expect(blob).not.toContain("well-known");
   });
 
   it("uses fictional .example emails that are not staff", () => {
@@ -60,7 +92,7 @@ describe("admin demo analytics dataset", () => {
     expect(getDemoTimeseries().length).toBe(30);
     expect(getDemoPipeline().stages.reduce((sum, row) => sum + row.count, 0)).toBe(DEMO_FUNDS.length);
     expect(DEMO_PAGES.length).toBeGreaterThan(5);
-    expect(getDemoViewer("viewer-maya")?.firm).toBe("Sequoia Capital");
+    expect(getDemoViewer("viewer-maya")?.firm).toBe("Redwood Harbor Capital");
   });
 });
 
@@ -78,7 +110,8 @@ describe("unconfigured admin contract", () => {
 
   it("opens /admin on the public deploy without a session", () => {
     expect(layout).toContain("isAdminBackendConfigured");
-    expect(layout).toContain("sample");
+    expect(layout).toContain("data-allow-copy");
+    expect(layout).not.toContain("Well-known");
   });
 
   it("gives chart columns a real height so percentage bars render", () => {
@@ -94,12 +127,12 @@ describe("unconfigured admin contract", () => {
 describe("static admin walkthrough", () => {
   const html = readFileSync(path.join(process.cwd(), "demo/admin.html"), "utf8");
 
-  it("mirrors the well-known fund table", () => {
-    expect(html).toContain("Sample IR analytics");
-    for (const name of WELL_KNOWN_DEMO_FUND_NAMES) {
-      expect(html).toContain(name);
+  it("mirrors the invented fund table", () => {
+    for (const name of DEMO_FUND_NAMES) {
+      expect(html).toContain(name === "Elm & Mercer" ? "Elm &amp; Mercer" : name);
     }
-    expect(html).toContain("maya@sequoia.example");
+    expect(html).toContain("maya@redwoodharbor.example");
     expect(html).not.toContain("@acme.example");
+    expect(html).not.toContain("Sample IR analytics");
   });
 });

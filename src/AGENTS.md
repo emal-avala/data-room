@@ -7,7 +7,8 @@ Next.js App Router. Tailwind v4. Bun.
 | `app/` | Pages + route handlers |
 | `app/admin/` | Console. Unconfigured production serves sample analytics |
 | `app/api/admin/` | Session then service-role, or demo-data when unconfigured |
-| `lib/analytics/demo-data.ts` | Well-known-fund walkthrough rows (`*.example` emails) |
+| `lib/analytics/demo-data.ts` | Invented-firm walkthrough rows (`*.example` emails) |
+| `components/ContentProtection.tsx` | Public-site copy deterrent; skip `/admin` |
 | `app/api/analytics/` | Identity from session, not the body |
 | `app/api/docs/` | Stamped HTML/PDF |
 | `config/site.ts` | Company name / domain / accent |
