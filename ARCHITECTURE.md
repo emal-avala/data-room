@@ -73,9 +73,16 @@ The weekly digest (`/api/analytics/digest`) is a Vercel Cron. It and
 
 `getAdminSupabase()` in `src/app/api/admin/_shared.ts`:
 
-1. Localhost + non-production → service role as the superadmin (dev only)
-2. Production → verified session + `isApprovedAdmin` → service role
-3. Actor email is returned separately; the service-role JWT is not the user
+1. No service-role backend (`isAdminBackendConfigured()` false) → `demo: true`
+   and the in-memory dataset in `src/lib/analytics/demo-data.ts`. This is
+   the public Vercel walkthrough. Do not 503.
+2. Localhost + non-production → service role as the superadmin (dev only)
+3. Production + configured backend → verified session + `isApprovedAdmin`
+   → service role
+4. Actor email is returned separately; the service-role JWT is not the user
+
+Demo fund names are well-known firms. Demo emails are `*.example` and
+must not use the company domain.
 
 ## Chunk gating
 

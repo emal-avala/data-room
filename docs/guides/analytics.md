@@ -14,3 +14,8 @@ client-supplied emails.
 | `POST /api/analytics/check-hot-leads` | Email when score ≥ 70 |
 
 Admin charts read the same tables through `getAdminSupabase()`.
+
+When Supabase is not configured (the public sample deploy), those routes
+return the in-memory dataset in `src/lib/analytics/demo-data.ts` instead
+of 503. The rows are fictional IR traffic from well-known funds
+(`maya@sequoia.example`, not a real partner address). Mutations no-op.

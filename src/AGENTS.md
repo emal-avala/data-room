@@ -5,8 +5,9 @@ Next.js App Router. Tailwind v4. Bun.
 | Path | Role |
 |------|------|
 | `app/` | Pages + route handlers |
-| `app/admin/` | Console (localhost skips auth) |
-| `app/api/admin/` | Session then service-role. See `api/admin/_shared.ts` |
+| `app/admin/` | Console. Unconfigured production serves sample analytics |
+| `app/api/admin/` | Session then service-role, or demo-data when unconfigured |
+| `lib/analytics/demo-data.ts` | Well-known-fund walkthrough rows (`*.example` emails) |
 | `app/api/analytics/` | Identity from session, not the body |
 | `app/api/docs/` | Stamped HTML/PDF |
 | `config/site.ts` | Company name / domain / accent |

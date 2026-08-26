@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { createClient } from "@/utils/supabase/server";
+import { isAdminBackendConfigured } from "@/lib/admin-backend";
 import { isApprovedAdmin } from "@/lib/admin-emails";
+import { createClient } from "@/utils/supabase/server";
 import { AdminNav } from "./components/AdminNav";
 
 export const dynamic = "force-dynamic";
@@ -14,10 +15,11 @@ async function isLocalhost(): Promise<boolean> {
 }
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  if (await isLocalhost()) {
+  const sample = !isAdminBackendConfigured();
+  if (sample || (await isLocalhost())) {
     return (
       <div className="min-h-screen bg-muted/40">
-        <AdminChrome>{children}</AdminChrome>
+        <AdminChrome sample={sample}>{children}</AdminChrome>
       </div>
     );
   }
@@ -40,9 +42,21 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   );
 }
 
-function AdminChrome({ children }: { children: React.ReactNode }) {
+function AdminChrome({
+  children,
+  sample = false,
+}: {
+  children: React.ReactNode;
+  sample?: boolean;
+}) {
   return (
     <>
+      {sample ? (
+        <div className="border-b border-border bg-background px-4 py-2 text-center text-sm text-muted-foreground">
+          Sample IR analytics. Well-known firms are fictional walkthrough traffic, not live
+          investors.
+        </div>
+      ) : null}
       <header className="border-b border-border bg-background">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Link href="/admin" className="text-sm font-semibold">
