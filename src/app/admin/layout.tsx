@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { isAdminBackendConfigured } from "@/lib/admin-backend";
 import { isApprovedAdmin } from "@/lib/admin-emails";
 import { createClient } from "@/utils/supabase/server";
+import { GitHubLink } from "@/components/GitHubLink";
 import { AdminNav } from "./components/AdminNav";
 
 export const dynamic = "force-dynamic";
@@ -50,9 +51,12 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
           <Link href="/admin" className="text-sm font-semibold">
             Admin
           </Link>
-          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-            Back to site
-          </Link>
+          <div className="flex items-center gap-4">
+            <GitHubLink />
+            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
+              Back to site
+            </Link>
+          </div>
         </div>
         <AdminNav />
       </header>

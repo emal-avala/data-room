@@ -9,6 +9,7 @@
 | `NEXT_PUBLIC_ROUND_LABEL` | yes | no | e.g. `Series A`, `Seed` |
 | `NEXT_PUBLIC_SITE_URL` | yes | yes in prod | Absolute links in email |
 | `NEXT_PUBLIC_ACCENT` | yes | no | Primary button color |
+| `NEXT_PUBLIC_REPO_URL` | yes | no | Header/footer GitHub link. Empty hides it. |
 | `SUPERADMIN_EMAIL` | no | yes | Immutable owner account |
 | `APPROVED_INVESTOR_EMAILS` | no | no | Comma-separated waitlist bypass |
 | `NEXT_PUBLIC_SUPABASE_URL` | yes | yes | Supabase project |

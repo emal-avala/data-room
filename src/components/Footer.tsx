@@ -1,3 +1,4 @@
+import { GitHubLink } from "@/components/GitHubLink";
 import { siteConfig } from "@/config/site";
 
 export function Footer() {
@@ -7,9 +8,12 @@ export function Footer() {
         <p>
           Confidential. Prepared for approved investors of {siteConfig.legalName}.
         </p>
-        <p className="font-mono uppercase tracking-wider">
-          {siteConfig.roundLabel} data room
-        </p>
+        <div className="flex items-center gap-4">
+          <GitHubLink showLabel className="text-xs" />
+          <p className="font-mono uppercase tracking-wider">
+            {siteConfig.roundLabel} data room
+          </p>
+        </div>
       </div>
     </footer>
   );

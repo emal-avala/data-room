@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { GitHubLink } from "@/components/GitHubLink";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/cn";
 
@@ -33,38 +34,41 @@ export function Header() {
             {siteConfig.roundLabel}
           </span>
         </Link>
-        <nav className="hidden items-center gap-6 md:flex">
-          {NAV.map((item) => {
-            const active =
-              item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "text-sm text-muted-foreground transition-colors hover:text-foreground",
-                  active && "font-medium text-primary",
-                )}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-          <Link href="/admin" className="text-sm text-muted-foreground hover:text-foreground">
-            Admin
-          </Link>
-          <Link href="/login" className="text-sm font-medium text-primary">
-            Sign in
-          </Link>
-        </nav>
-        <button
-          type="button"
-          className="md:hidden"
-          aria-label="Open menu"
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-4">
+          <nav className="hidden items-center gap-6 md:flex">
+            {NAV.map((item) => {
+              const active =
+                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "text-sm text-muted-foreground transition-colors hover:text-foreground",
+                    active && "font-medium text-primary",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            <Link href="/admin" className="text-sm text-muted-foreground hover:text-foreground">
+              Admin
+            </Link>
+            <Link href="/login" className="text-sm font-medium text-primary">
+              Sign in
+            </Link>
+          </nav>
+          <GitHubLink />
+          <button
+            type="button"
+            className="md:hidden"
+            aria-label="Open menu"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
       {open ? (
         <nav className="border-t border-border px-4 py-3 md:hidden">

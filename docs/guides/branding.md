@@ -15,6 +15,7 @@ Set in `.env.local` (Vercel: Project → Settings → Environment Variables):
 | `NEXT_PUBLIC_ROUND_LABEL` | `Seed` |
 | `NEXT_PUBLIC_SITE_URL` | `https://ir.northwind.example` |
 | `NEXT_PUBLIC_ACCENT` | `#1D4ED8` |
+| `NEXT_PUBLIC_REPO_URL` | `https://github.com/you/data-room` (empty hides the mark) |
 | `SUPERADMIN_EMAIL` | `you@northwind.example` |
 
 Same defaults live in `src/config/site.ts` if env is unset.

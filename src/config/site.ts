@@ -21,6 +21,14 @@ export const siteConfig = {
   ),
   roundLabel: env("NEXT_PUBLIC_ROUND_LABEL", "Series A"),
   siteUrl: env("NEXT_PUBLIC_SITE_URL", "http://localhost:3000").replace(/\/$/, ""),
+  /**
+   * Public GitHub repo shown in the header/footer.
+   * Set `NEXT_PUBLIC_REPO_URL=` (empty) to hide the mark on a live raise.
+   */
+  repoUrl: (process.env.NEXT_PUBLIC_REPO_URL === ""
+    ? ""
+    : env("NEXT_PUBLIC_REPO_URL", "https://github.com/emal-avala/data-room")
+  ).replace(/\/$/, ""),
   /** Accent used for primary CTAs and the active nav indicator. */
   accent: env("NEXT_PUBLIC_ACCENT", "#1D4ED8"),
   fromEmail: env("IR_FROM_EMAIL", "Acme IR <noreply@acme.example>"),
