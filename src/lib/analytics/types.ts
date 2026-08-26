@@ -53,6 +53,8 @@ export interface FundEngagement {
   stage: string;
   viewer_count: number;
   engagement_score: number;
+  domain?: string;
+  last_activity_at?: string;
 }
 
 export interface PipelineSummary {

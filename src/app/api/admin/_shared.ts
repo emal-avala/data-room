@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { isAdminBackendConfigured } from "@/lib/admin-backend";
+import { DEMO_ADMIN_EMAIL } from "@/lib/analytics/demo-data";
 import {
   getSuperadminEmail,
   isApprovedAdmin,
@@ -9,11 +11,7 @@ import {
 } from "@/lib/admin-emails";
 
 export function isSupabaseConfigured(): boolean {
-  return !!(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
-    process.env.SUPABASE_SERVICE_ROLE_KEY
-  );
+  return isAdminBackendConfigured();
 }
 
 export async function isLocalhost(): Promise<boolean> {
@@ -22,33 +20,54 @@ export async function isLocalhost(): Promise<boolean> {
   return host.includes("localhost") || host.includes("127.0.0.1");
 }
 
+export type AdminSession =
+  | {
+      demo: true;
+      supabase: null;
+      actorEmail: string;
+      actorIsSuperadmin: boolean;
+      error: null;
+    }
+  | {
+      demo: false;
+      supabase: SupabaseClient;
+      actorEmail: string | null;
+      actorIsSuperadmin: boolean;
+      error: null;
+    }
+  | {
+      demo: false;
+      supabase: null;
+      actorEmail: null;
+      actorIsSuperadmin: false;
+      error: NextResponse;
+    };
+
 /**
  * Admin API auth contract.
  *
+ * Unconfigured backend → sample analytics (public Vercel walkthrough).
  * Browser → Supabase session cookie
  * Route → getUser() → isApprovedAdmin(email)
  * Data → service-role client (bypasses RLS)
  * Actor identity is returned separately because service-role JWTs do not
  * carry the browser session.
  */
-export async function getAdminSupabase(): Promise<{
-  supabase: SupabaseClient;
-  actorEmail: string | null;
-  actorIsSuperadmin: boolean;
-  error: NextResponse | null;
-}> {
-  if (!isSupabaseConfigured()) {
+export async function getAdminSupabase(): Promise<AdminSession> {
+  if (!isAdminBackendConfigured()) {
     return {
-      supabase: null as never,
-      actorEmail: null,
+      demo: true,
+      supabase: null,
+      actorEmail: DEMO_ADMIN_EMAIL,
       actorIsSuperadmin: false,
-      error: NextResponse.json({ error: "Database not configured" }, { status: 503 }),
+      error: null,
     };
   }
 
   if (await isLocalhost()) {
     const { createAdminClient } = await import("@/utils/supabase/server");
     return {
+      demo: false,
       supabase: createAdminClient(),
       actorEmail: getSuperadminEmail(),
       actorIsSuperadmin: true,
@@ -65,7 +84,8 @@ export async function getAdminSupabase(): Promise<{
   const actorEmail = normalizeAdminEmail(user?.email);
   if (!actorEmail || !user?.email_confirmed_at) {
     return {
-      supabase: null as never,
+      demo: false,
+      supabase: null,
       actorEmail: null,
       actorIsSuperadmin: false,
       error: NextResponse.json({ error: "Unauthorized" }, { status: 401 }),
@@ -74,7 +94,8 @@ export async function getAdminSupabase(): Promise<{
 
   if (!(await isApprovedAdmin(actorEmail, supabase))) {
     return {
-      supabase: null as never,
+      demo: false,
+      supabase: null,
       actorEmail: null,
       actorIsSuperadmin: false,
       error: NextResponse.json({ error: "Unauthorized" }, { status: 401 }),
@@ -83,9 +104,14 @@ export async function getAdminSupabase(): Promise<{
 
   const { createAdminClient } = await import("@/utils/supabase/server");
   return {
+    demo: false,
     supabase: createAdminClient(),
     actorEmail,
     actorIsSuperadmin: isSuperadmin(actorEmail),
     error: null,
   };
+}
+
+export function jsonDemo<T extends Record<string, unknown>>(body: T) {
+  return NextResponse.json({ ...body, demo: true });
 }
