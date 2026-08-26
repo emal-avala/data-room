@@ -19,6 +19,8 @@ Published at `https://emal-avala.github.io/data-room/` by
 | `memo.html` | `/docs/investment-memo` |
 | `deck.html` | `/docs/pitch-deck` — must stay identical to `content/documents/sample-pitch-deck.html` |
 | `financial-overview.html` | `/docs/financial-overview` |
+| `security.html` | `/docs/security-compliance` |
+| `ip.html` | `/docs/intellectual-property` |
 | `admin.html` | `/admin` |
 | `styles.css` | `src/app/globals.css` tokens |
 | `package.json` / `vercel.json` | Static Vercel contract when the project builds `gh-pages` |

@@ -16,6 +16,8 @@
     { "source": "/docs/technical-architecture", "destination": "/architecture.html" },
     { "source": "/docs/case-studies", "destination": "/sites.html" },
     { "source": "/docs/cap-table", "destination": "/captable.html" },
+    { "source": "/docs/security-compliance", "destination": "/security.html" },
+    { "source": "/docs/intellectual-property", "destination": "/ip.html" },
     { "source": "/roadmap", "destination": "/roadmap.html" },
     { "source": "/financials", "destination": "/financials.html" },
     { "source": "/financials/pnl", "destination": "/pnl.html" },
