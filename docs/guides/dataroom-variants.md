@@ -5,7 +5,7 @@ Two built-in rooms ship:
 | Slug | Who sees it | Documents |
 |------|-------------|-----------|
 | `core` | Default first conversation | pitch-deck, investment-memo, financial-overview |
-| `full` | Assigned lead, or staff | core + use-of-funds, cap-table |
+| `full` | Assigned lead, or staff | core + `FULL_ONLY_DOCUMENTS` (use of funds, GTM, architecture, site notes, security, IP, cap table) |
 
 Staff (internal email domain) always see the full room and bypass the
 allowlist (`staffBypass`).

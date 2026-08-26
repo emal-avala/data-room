@@ -14,6 +14,7 @@ supabase db reset
 | File | Role |
 |------|------|
 | `migrations/001_schema.sql` | Tables, RLS, revoked Data API on investor tables |
+| `migrations/002_ip_security_documents.sql` | Full-room security + IP slugs. Apply after the app deploy that registers them. |
 | `seed.sql` | Sample funds, rooms, document rows matching `src/lib/documents.ts` |
 | `config.toml` | Local CLI |
 

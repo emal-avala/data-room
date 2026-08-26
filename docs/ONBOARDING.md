@@ -84,7 +84,8 @@ and keep `variable: "--font-sans"`. No other files need the family name.
 ## 3. Documents
 
 Sample slugs: `pitch-deck`, `investment-memo`, `financial-overview`,
-`use-of-funds` (full room), `cap-table` (NDA), `internal-notes` (staff).
+`use-of-funds` (full room), `security-compliance` (full room),
+`intellectual-property` (NDA), `cap-table` (NDA), `internal-notes` (staff).
 
 Replace files under `content/documents/`. Register them in
 `src/lib/documents.ts`. Follow [guides/add-document.md](guides/add-document.md)
@@ -97,7 +98,8 @@ Never put a deck or PDF in `public/`. Byte routes stamp the viewer's email.
 ## 4. Supabase (auth + database)
 
 1. New project at supabase.com.
-2. SQL Editor → run `supabase/migrations/001_schema.sql`.
+2. SQL Editor → run `supabase/migrations/001_schema.sql`, then any later
+   `002_….sql` files.
 3. SQL Editor → run `supabase/seed.sql`.
 4. **Authentication → Providers** → Google and/or Azure.
    - Google: OAuth client (Web). Redirect

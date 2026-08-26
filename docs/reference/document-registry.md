@@ -23,3 +23,7 @@ not the control.
 `primary` documents appear on `/docs`. `on-request` stay reachable by
 direct URL after a grant. `retired` stay in the registry so old grants do
 not 404, but they are not listed.
+
+Security and IP are their own slugs (`security-compliance`,
+`intellectual-property`). Do not bury them inside architecture or the
+cap table.
