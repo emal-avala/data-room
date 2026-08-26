@@ -30,7 +30,7 @@ const WHY_NOW = [
 export default function HomePage() {
   return (
     <>
-      <section className="border-b border-border bg-gradient-to-br from-slate-50 via-white to-blue-50/40">
+      <section className="border-b border-border bg-gradient-to-br from-[var(--muted)] via-[var(--background)] to-[var(--hero-tint)]">
         <div className="mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-center px-4 py-24">
           <p className="text-eyebrow">{siteConfig.roundLabel}</p>
           <h1 className="mt-4 max-w-3xl text-4xl font-light tracking-tight md:text-6xl">{COMPANY.name}</h1>

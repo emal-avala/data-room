@@ -26,9 +26,24 @@ spacing:
 
 ## Aesthetic
 
-- Light only. No dark mode. No theme toggle.
+- Light is the default. Dark is a visitor toggle (`data-theme` on `<html>`),
+  persisted in `localStorage` as `data-room-theme`, and first-visit follows
+  `prefers-color-scheme`. Same tokens, inverted surfaces. Accent stays
+  `#1D4ED8` and still only appears on CTAs, active nav, and link hover.
 - Minimal decoration. Nothing that does not serve comprehension.
 - Accent color is a CSS variable (`--primary`, default `#1D4ED8`). Change it in `.env` / `src/config/site.ts`. Do not scatter hex.
+
+Dark surfaces (do not invent a second accent):
+
+| Token | Light | Dark |
+|-------|-------|------|
+| `--background` | `#FFFFFF` | `#12151C` |
+| `--foreground` | `#141821` | `#EEF0F3` |
+| `--muted` / `--card` | `#F9FAFB` | `#1A1E27` |
+| `--muted-foreground` | `#676B73` | `#9AA1AB` |
+| `--border` | `#E5E7EB` | `#2A303A` |
+
+The Series A deck does **not** follow the site theme.
 
 ## Accent usage
 
@@ -65,8 +80,8 @@ at `demo/deck.html`) carries its own palette and does **not** inherit the
 tokens above. It is the only surface allowed to do so.
 
 The deck is a self-contained presentation: one HTML file, inline styles,
-no build. It is served in the data room, opened standalone on GitHub
-Pages, printed, and handed to people outside the app — so it cannot
+no build. It is served in the data room, opened standalone, printed,
+and handed to people outside the app — so it cannot
 depend on stylesheets it may not be loaded alongside. It inverts the
 site contract: dark canvas by default, accent used as a presentation
 color rather than restricted to CTAs.

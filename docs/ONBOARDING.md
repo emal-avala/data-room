@@ -71,10 +71,10 @@ Do these before you invite a fund. Details: [guides/branding.md](guides/branding
 | Banner | `src/data/announcements.ts` |
 | NDA | `src/lib/nda-agreement.ts` — have counsel review |
 | Deck HTML | `content/documents/sample-pitch-deck.html` — ten-slide theme, [deck.md](guides/deck.md) |
-| Static preview (GitHub Pages) | `demo/*.html` + `demo/styles.css` |
+| Local HTML snapshot | `demo/*.html` + `demo/styles.css` (not a public host) |
 
 Accent (`--primary`) is for buttons and the active nav only. Body text
-stays `--foreground`. Light theme only.
+stays `--foreground`. Light is the default; visitors can switch to dark.
 
 To swap the font: change the `next/font/google` import in `layout.tsx`
 and keep `variable: "--font-sans"`. No other files need the family name.
@@ -147,16 +147,10 @@ Full page: [deploy/vercel-supabase.md](deploy/vercel-supabase.md).
 
 ---
 
-## 6. GitHub Pages demo (no login)
+## 6. Public demo
 
-`demo/` is static HTML. Investors should use the Vercel app. Pages is
-the public walkthrough.
-
-1. Repo **Settings → Pages → Source: GitHub Actions**.
-2. Actions → **Pages** → Run workflow.
-3. Site: `https://<you>.github.io/data-room/`
-
-[deploy/github-pages.md](deploy/github-pages.md).
+The public site is **https://data-room-coral.vercel.app/**. GitHub Pages
+is retired — do not turn Actions Pages back on.
 
 ---
 

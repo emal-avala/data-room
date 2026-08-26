@@ -2,7 +2,7 @@
 
 The Series A deck is a self-contained HTML artifact: one file, inline
 styles, no build. It is served from `content/documents/sample-pitch-deck.html`
-and mirrored at `demo/deck.html` for GitHub Pages.
+and mirrored at `demo/deck.html` for the local snapshot.
 
 It is **not** the IR site. Dark canvas by default. Accent used as a
 presentation color, not only on buttons. Slide content uses Source Sans 3;

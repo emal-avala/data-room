@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://emal-avala.github.io/data-room/">Live demo</a> ·
+  <a href="https://data-room-coral.vercel.app/">Live demo</a> ·
   <a href="docs/ONBOARDING.md">Onboarding</a> ·
   <a href="#deploy">Deploy</a> ·
   <a href="docs/deploy/vercel-supabase.md">Vercel + Supabase</a>
@@ -39,8 +39,8 @@ cd data-room
 bun install && bun dev    # http://localhost:3000
 ```
 
-**Demo (no login):** [emal-avala.github.io/data-room](https://emal-avala.github.io/data-room/)
-— static HTML from `demo/`, published from the `gh-pages` branch.
+**Live demo:** [data-room-coral.vercel.app](https://data-room-coral.vercel.app/)
+— the Next.js app on Vercel (mock auth when Supabase is unset).
 
 ## Deploy
 
@@ -96,7 +96,7 @@ How a viewer gets in:
 | [Vercel + Supabase](docs/deploy/vercel-supabase.md) | Production |
 | [Environment variables](docs/deploy/environment-variables.md) | Every key |
 | [Local development](docs/deploy/local-development.md) | Supabase CLI |
-| [GitHub Pages](docs/deploy/github-pages.md) | Public demo |
+| [GitHub Pages (retired)](docs/deploy/github-pages.md) | Do not republish `demo/` |
 | [Branding](docs/guides/branding.md) | Name, color, font, copy |
 | [Deck theme](docs/guides/deck.md) | Ten-slide HTML deck + restyle |
 | [Add a document](docs/guides/add-document.md) | Registry + gating |
@@ -116,7 +116,7 @@ src/config/          Company defaults
 content/documents/   Decks and PDFs (not public/)
 supabase/            Schema + seed
 docs/                Onboarding and how-to
-demo/                GitHub Pages preview (no auth)
+demo/                Local HTML snapshot (not a public host)
 scripts/onboard.sh   Copy .env.example
 ```
 

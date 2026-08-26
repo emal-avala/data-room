@@ -10,6 +10,7 @@ Next.js App Router. Tailwind v4. Bun.
 | `lib/analytics/demo-data.ts` | Invented-firm walkthrough rows (`*.example` emails) |
 | `components/ContentProtection.tsx` | Public-site copy deterrent; skip `/admin` |
 | `components/GitHubLink.tsx` | Header/footer octocat → `siteConfig.repoUrl` |
+| `lib/theme.ts` | Light/dark `data-theme` bootstrap key |
 | `app/api/analytics/` | Identity from session, not the body |
 | `app/api/docs/` | Stamped HTML/PDF |
 | `config/site.ts` | Company name / domain / accent |

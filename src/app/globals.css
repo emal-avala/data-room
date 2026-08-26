@@ -2,6 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
   --foreground: #141821;
   --muted: #f9fafb;
@@ -10,10 +11,23 @@
   --card: #f9fafb;
   --primary: #1d4ed8;
   --primary-foreground: #ffffff;
+  --hero-tint: color-mix(in srgb, var(--primary) 8%, var(--background));
   --header-height: 3.5rem;
   --radius: 12px;
   --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #12151c;
+  --foreground: #eef0f3;
+  --muted: #1a1e27;
+  --muted-foreground: #9aa1ab;
+  --border: #2a303a;
+  --card: #1a1e27;
+  --primary: #1d4ed8;
+  --primary-foreground: #ffffff;
 }
 
 @theme inline {
@@ -72,7 +86,20 @@ select,
 }
 
 .container-box:hover {
-  box-shadow: 0 1px 2px rgb(20 24 33 / 0.06);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+[data-theme="dark"] .prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--foreground);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-quotes: var(--muted-foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
 }
 
 table {

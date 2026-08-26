@@ -1,4 +1,5 @@
 import { GitHubLink } from "@/components/GitHubLink";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { siteConfig } from "@/config/site";
 
 export function Footer() {
@@ -9,6 +10,7 @@ export function Footer() {
           Confidential. Prepared for approved investors of {siteConfig.legalName}.
         </p>
         <div className="flex items-center gap-4">
+          <ThemeToggle />
           <GitHubLink showLabel className="text-xs" />
           <p className="font-mono uppercase tracking-wider">
             {siteConfig.roundLabel} data room

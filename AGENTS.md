@@ -9,8 +9,10 @@ Next.js 16 App Router + Supabase Auth + Vercel. Investors sign in with
 Google or Microsoft. Documents are gated by room variant and optional NDA.
 `/admin` is the console: access queue, viewers, rooms, analytics.
 
-Production host is **Vercel**. The GitHub Pages site in `demo/` is a static
-walkthrough with no login — do not treat it as the app.
+Production host is **Vercel**
+(`https://data-room-coral.vercel.app/`). GitHub Pages is retired — do
+not republish `demo/` to `gh-pages`. `demo/` is a local HTML snapshot
+for tests only.
 
 ## First run (local)
 
@@ -85,13 +87,13 @@ Full checklist: [docs/guides/add-document.md](docs/guides/add-document.md).
 
 ## Demo vs production
 
-| | Localhost | Vercel without Supabase | Vercel + Supabase | GitHub Pages (`demo/`) |
-|--|-----------|-------------------------|-------------------|------------------------|
-| Auth | Off (staff bypass) | Mock Google/Microsoft walkthrough | On | Mock static `/login` |
-| Database | Optional | None | Required | None |
-| `/docs/[slug]` | Full room | Full sample room, no staff bypass | Session + variant | Static HTML rewrite |
-| `/admin` | Full console | Sample analytics (invented firms) | Session + DB | Static HTML |
-| Edit | `src/` | `src/` | `src/` | `demo/*.html` |
+| | Localhost | Vercel without Supabase | Vercel + Supabase |
+|--|-----------|-------------------------|-------------------|
+| Auth | Off (staff bypass) | Mock Google/Microsoft walkthrough | On |
+| Database | Optional | None | Required |
+| `/docs/[slug]` | Full room | Full sample room, no staff bypass | Session + variant |
+| `/admin` | Full console | Sample analytics (invented firms) | Session + DB |
+| Edit | `src/` | `src/` | `src/` |
 
 Production without Supabase must **not** 404 document pages. That is the
 public Acme walkthrough at `*.vercel.app/docs/pitch-deck`. Encoded in
@@ -136,6 +138,6 @@ Deck geometry and the ten-slide spine: [docs/guides/deck.md](docs/guides/deck.md
 | `docs/` | Onboarding and how-to |
 | `src/` | App, API, auth contracts |
 | `supabase/` | Schema and seed |
-| `demo/` | GitHub Pages preview |
+| `demo/` | Local HTML snapshot (not published) |
 | `content/documents/` | Files on disk |
-| `.github/` | CI and Pages |
+| `.github/` | CI |

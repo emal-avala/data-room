@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { GitHubLink } from "@/components/GitHubLink";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/cn";
 
@@ -59,6 +60,7 @@ export function Header() {
               Sign in
             </Link>
           </nav>
+          <ThemeToggle />
           <GitHubLink />
           <button
             type="button"

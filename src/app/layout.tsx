@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { siteConfig } from "@/config/site";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
@@ -7,6 +8,7 @@ import { ContentProtection } from "@/components/ContentProtection";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Providers } from "@/components/Providers";
+import { THEME_BOOTSTRAP_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -27,8 +29,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={sourceSans.variable}>
+    <html lang="en" className={sourceSans.variable} suppressHydrationWarning>
       <body className="min-h-screen antialiased">
+        <Script id="theme-boot" strategy="beforeInteractive">
+          {THEME_BOOTSTRAP_SCRIPT}
+        </Script>
         <Providers>
           <ContentProtection />
           <AnnouncementBanner />

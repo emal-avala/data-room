@@ -5,6 +5,7 @@ import { isAdminBackendConfigured } from "@/lib/admin-backend";
 import { isApprovedAdmin } from "@/lib/admin-emails";
 import { createClient } from "@/utils/supabase/server";
 import { GitHubLink } from "@/components/GitHubLink";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { AdminNav } from "./components/AdminNav";
 
 export const dynamic = "force-dynamic";
@@ -52,6 +53,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
             Admin
           </Link>
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             <GitHubLink />
             <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
               Back to site
