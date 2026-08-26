@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { siteConfig } from "@/config/site";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
@@ -31,9 +30,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={sourceSans.variable} suppressHydrationWarning>
       <body className="min-h-screen antialiased">
-        <Script id="theme-boot" strategy="beforeInteractive">
-          {THEME_BOOTSTRAP_SCRIPT}
-        </Script>
+        {/* Raw inline boot: Next 16 queues Script beforeInteractive via __next_s and reload then loses the theme. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
         <Providers>
           <ContentProtection />
           <AnnouncementBanner />

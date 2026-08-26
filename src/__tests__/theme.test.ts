@@ -15,8 +15,12 @@ describe("light and dark theme", () => {
     const css = readFileSync(path.join(process.cwd(), "src/app/globals.css"), "utf8");
     expect(css).toContain('[data-theme="dark"]');
     expect(css.match(/--primary:\s*#1d4ed8/g)?.length).toBeGreaterThanOrEqual(2);
-    expect(readFileSync(path.join(process.cwd(), "src/app/layout.tsx"), "utf8")).toContain(
-      "THEME_BOOTSTRAP_SCRIPT",
+    const layout = readFileSync(path.join(process.cwd(), "src/app/layout.tsx"), "utf8");
+    expect(layout).toContain("THEME_BOOTSTRAP_SCRIPT");
+    expect(layout).toContain("dangerouslySetInnerHTML");
+    expect(layout).not.toMatch(/from ["']next\/script["']/);
+    expect(readFileSync(path.join(process.cwd(), "src/components/ThemeProvider.tsx"), "utf8")).toContain(
+      "localStorage.getItem(THEME_STORAGE_KEY)",
     );
     expect(readFileSync(path.join(process.cwd(), "src/components/Header.tsx"), "utf8")).toContain(
       "ThemeToggle",

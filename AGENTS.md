@@ -114,6 +114,13 @@ from `src/lib/auth-demo.ts`, no OAuth call. Encoded there — do not
 restore the empty developer state. The mock viewer is
 `demo@example.com`, never `@acme.example`.
 
+Theme: persist `data-room-theme` (`light` | `dark`) in `localStorage`.
+The boot script in `src/app/layout.tsx` must be a raw
+`<script dangerouslySetInnerHTML>` — `next/script` `beforeInteractive`
+is queued via `__next_s` on Next 16 and reload then loses the
+choice. `ThemeProvider` must also read that key on mount. Encoded in
+`src/lib/theme.ts` + `src/__tests__/theme.test.ts`.
+
 Copy deterrent: `ContentProtection` plus `user-select: none` on the
 public site (investor-site contract — selection, copy/cut, context
 menu, drag, Ctrl/Cmd C/X/A/S/P/U). `/admin` is exempt. Do not weaken

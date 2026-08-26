@@ -17,6 +17,16 @@ function readDomTheme(): ThemeName {
   return isThemeName(current) ? current : "light";
 }
 
+function readStoredTheme(): ThemeName | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
+    return isThemeName(stored) ? stored : null;
+  } catch {
+    return null;
+  }
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeName>(readDomTheme);
 
@@ -35,8 +45,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [setTheme, theme]);
 
   useEffect(() => {
-    setThemeState(readDomTheme());
-  }, []);
+    setTheme(readStoredTheme() ?? readDomTheme());
+  }, [setTheme]);
 
   return <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>{children}</ThemeContext.Provider>;
 }
