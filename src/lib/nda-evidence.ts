@@ -1,4 +1,5 @@
 import { createAdminClient, createClient } from "@/utils/supabase/server";
+import { isSupabaseConfigured } from "@/utils/supabase/config";
 import type { Document } from "@/lib/documents";
 
 export type DocumentNdaAccess = "not_required" | "signed" | "unsigned" | "unauthenticated";
@@ -20,6 +21,7 @@ export async function getDocumentNdaAccess(
   document: Document,
 ): Promise<DocumentNdaAccess> {
   if (!document.requireNda) return "not_required";
+  if (!isSupabaseConfigured()) return "not_required";
 
   try {
     const authClient = await createClient();

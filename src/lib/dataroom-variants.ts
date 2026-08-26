@@ -8,6 +8,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { isInternalViewer } from "./document-audience";
 import { SELECTABLE_DOCUMENT_SLUGS } from "./documents";
+import { isSupabaseConfigured } from "@/utils/supabase/config";
 
 export const DEFAULT_DATAROOM_VARIANT_SLUG = "core";
 export const FULL_DATAROOM_VARIANT_SLUG = "full";
@@ -444,15 +445,39 @@ function developmentStaffContext(): AuthenticatedDataRoomContext {
 }
 
 /**
- * When Supabase is not configured, production fails closed. Local/preview
- * development serves the full built-in room so the UI can be clicked
- * without standing up OAuth. Matches the localhost middleware bypass.
+ * Public OSS demo email. Must not be on the company domain or
+ * `internal-notes` would leak through `canViewAudience`.
  */
+export const PUBLIC_DEMO_VIEWER_EMAIL = "demo@example.com";
+
+export function publicDemoDataRoomContext(): AuthenticatedDataRoomContext {
+  return {
+    status: "allowed",
+    email: PUBLIC_DEMO_VIEWER_EMAIL,
+    context: {
+      variant: BUILTIN_DATAROOM_VARIANTS[FULL_DATAROOM_VARIANT_SLUG],
+      fundId: null,
+      staffBypass: false,
+      source: "builtin",
+    },
+  };
+}
+
+/**
+ * No Supabase means there is no login. Local/preview keeps the staff
+ * bypass so `/admin` is clickable. Production Vercel (this sample
+ * deploy) serves the full builtin room instead of 404ing every
+ * `/docs/[slug]` — that is the public Acme walkthrough.
+ */
+export function unconfiguredDataRoomAccess(
+  nodeEnv: string | undefined,
+): AuthenticatedDataRoomContext {
+  return nodeEnv === "production" ? publicDemoDataRoomContext() : developmentStaffContext();
+}
+
 export async function resolveAuthenticatedDataRoomContext(): Promise<AuthenticatedDataRoomContext> {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    return process.env.NODE_ENV === "production"
-      ? { status: "unavailable" }
-      : developmentStaffContext();
+  if (!isSupabaseConfigured()) {
+    return unconfiguredDataRoomAccess(process.env.NODE_ENV);
   }
 
   try {

@@ -3,6 +3,10 @@
 Fifteen minutes if you already have both accounts. After this, investors
 sign in with Google or Microsoft and you approve them in `/admin`.
 
+Skipping Supabase is valid for the public sample: Vercel still builds
+the Next.js app, and `/docs/[slug]` serves the full builtin room. Set
+the keys below only when you want a gated room.
+
 ## 1. Supabase
 
 1. Create a project at [supabase.com](https://supabase.com).
