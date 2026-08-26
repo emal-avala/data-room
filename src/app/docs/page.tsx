@@ -24,8 +24,8 @@ export default async function DocumentsPage() {
       <p className="text-eyebrow">Data room</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight">Documents</h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
-        Core room: deck, memo, financials. Full room adds use of funds, go-to-market, architecture, site notes, and
-        the NDA-gated cap table.
+        Core room: deck, memo, financials. Full room adds use of funds, go-to-market, architecture, site notes,
+        security and compliance, and the NDA-gated cap table and IP schedule.
       </p>
       <div className="mt-12 space-y-12">
         {categories.map((category) => (

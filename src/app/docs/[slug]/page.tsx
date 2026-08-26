@@ -7,9 +7,11 @@ import {
   CompetitiveBody,
   FinancialsBody,
   GoToMarketBody,
+  IntellectualPropertyBody,
   InternalNotesBody,
   MemoBody,
   SampleDeckEmbed,
+  SecurityComplianceBody,
   UseOfFundsBody,
 } from "@/content/ir/articles";
 import { getDocumentBySlug } from "@/lib/documents";
@@ -49,6 +51,8 @@ export default async function DocumentPage({
     if (slug === "technical-architecture") return <ArchitectureBody />;
     if (slug === "case-studies") return <CaseStudiesBody />;
     if (slug === "cap-table") return <CapTableBody />;
+    if (slug === "intellectual-property") return <IntellectualPropertyBody />;
+    if (slug === "security-compliance") return <SecurityComplianceBody />;
     if (slug === "internal-notes") return <InternalNotesBody />;
     if (document.type === "pdf") {
       return (

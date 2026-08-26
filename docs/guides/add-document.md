@@ -14,3 +14,13 @@ but not in the running bundle **locks every room** that selected it.
 `/api/docs/<slug>/deck` or `/file`, which stamp the viewer.
 
 Bump `version` when you edit content so returning readers see "Updated".
+
+The template already carves out two full-room slots that Series A rooms
+usually grow. Edit these pages instead of adding a third dump:
+
+| Slug | Category | NDA | Put here |
+|------|----------|-----|----------|
+| `security-compliance` | Security | No | Controls, residency, attestation status. Not a certificate claim. Pen-test PDF stays on request. |
+| `intellectual-property` | Legal | Yes | Patents, inbound licenses, OSS. Application numbers stay with counsel. |
+
+Do not fold either into architecture or the cap table.

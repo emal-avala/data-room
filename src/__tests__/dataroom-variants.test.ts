@@ -57,6 +57,8 @@ describe("canAccessDataRoomDocument", () => {
   it("allows core slugs and denies full-only slugs", () => {
     expect(canAccessDataRoomDocument(core, "pitch-deck")).toBe(true);
     expect(canAccessDataRoomDocument(core, "cap-table")).toBe(false);
+    expect(canAccessDataRoomDocument(core, "intellectual-property")).toBe(false);
+    expect(canAccessDataRoomDocument(core, "security-compliance")).toBe(false);
   });
 
   it("staff bypass sees every slug", () => {
@@ -81,6 +83,8 @@ describe("unconfigured production demo", () => {
     expect(canAccessDataRoomDocument(access.context, "pitch-deck")).toBe(true);
     expect(canAccessDataRoomDocument(access.context, "use-of-funds")).toBe(true);
     expect(canAccessDataRoomDocument(access.context, "cap-table")).toBe(true);
+    expect(canAccessDataRoomDocument(access.context, "intellectual-property")).toBe(true);
+    expect(canAccessDataRoomDocument(access.context, "security-compliance")).toBe(true);
     expect(canAccessDataRoomDocument(access.context, "internal-notes")).toBe(false);
     expect(canViewAudience("internal", access.email)).toBe(false);
   });

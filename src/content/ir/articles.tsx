@@ -349,6 +349,100 @@ export function CapTableBody() {
   );
 }
 
+export function SecurityComplianceBody() {
+  return (
+    <ArticlePage
+      eyebrow="Security"
+      title="Security and compliance"
+      subtitle="What is in force, what is in flight, and what stays on request. Not a certificate."
+      date="2026-06-30"
+    >
+      <p>
+        A yard is a customer&apos;s site. Sensor bags, door events, and trailer identities are their data. This page
+        is the control summary a partner asks for before they put us on a vendor list. It is not a SOC 2 report and
+        it does not claim we are certified.
+      </p>
+      <h2>Data residency</h2>
+      <p>
+        Raw recordings do not leave a pharma or port site. Training happens on-prem or in a customer-approved
+        region. Model weights can leave; the bags do not. That term is in the MSA, and it is restated on the
+        architecture page so engineering and legal say the same thing.
+      </p>
+      <h2>Access</h2>
+      <p>
+        Investor and admin logins are the company&apos;s identity provider — Google or Microsoft — with an allowlist.
+        There is no shared yard password. Production access to a site graph is named, time-boxed, and logged.
+      </p>
+      <h2>Attestation</h2>
+      <p>
+        SOC 2 Type I fieldwork is scheduled for Q4 2026. Until a report exists, do not write &quot;SOC 2&quot; on a
+        customer slide. Pen test is annual; the last run was March 2026. Critical findings are closed. The report
+        itself is on request under NDA — it is not attached here.
+      </p>
+      <h2>Incidents</h2>
+      <p>No reportable incidents as of {COMPANY.dataAsOf}.</p>
+      <h2>What this page is not</h2>
+      <p>
+        Not HIPAA coverage. We do not store pedigrees or patient data. A pharma 3PL site is still a trailer yard.
+        Not a vehicle-safety certification — the partner tractor carries its own. Not an ISO 27001 certificate.
+      </p>
+      <p>
+        A public fork should replace this page with the company&apos;s real control report, subprocessors, and
+        counsel&apos;s wording. Keep the carve-out. Do not bury security inside the architecture memo.
+      </p>
+    </ArticlePage>
+  );
+}
+
+export function IntellectualPropertyBody() {
+  return (
+    <ArticlePage
+      eyebrow="Legal"
+      title="Intellectual property"
+      subtitle="What we own, what we license in, and what we will not put on a slide. NDA-gated."
+      date="2026-06-30"
+    >
+      <p>
+        Counsel holds the docket. This page lists subject matter and license posture so a partner can diligence the
+        estate. Application numbers, claim charts, and the assignment file stay with counsel — they are not copied
+        here.
+      </p>
+      <h2>What Acme owns</h2>
+      <p>
+        The yard graph, occupancy-aware dispatch, and the on-vehicle interlock that refuses a move the safety PLC
+        has not pre-cleared. Perception weights trained on customer yards are ours to use under the MSA; the bags
+        are not ours to take home.
+      </p>
+      <h2>Filings</h2>
+      <p>
+        Two provisionals cover (1) dispatch that will not assign a door the WMS has not released and (2) the PLC
+        interlock on the tractor. Both are counsel-held. If a later filing publishes, this page will say so. Until
+        then there is nothing to Google.
+      </p>
+      <h2>Inbound licenses</h2>
+      <p>
+        The manufacturing partner licenses the tractor CAN / SDK under a field-of-use limited to inside-the-fence
+        moves. Non-exclusive. We do not own vehicle IP and we do not sublicense the partner&apos;s stack. The site
+        license we sell is software.
+      </p>
+      <h2>Open source</h2>
+      <p>
+        Linux and ROS 2 on the vehicle computer, plus a typical MIT / Apache library set. No copyleft in the
+        on-vehicle motion path. An SBOM is on request; it is not pasted into the room.
+      </p>
+      <h2>Outbound</h2>
+      <p>
+        The standard MSA is a site license, not a patent grant. We do not offer a patent cross-license in the first
+        paper. Trade secrets: unlabeled maps, raw bags, and the unlabeled override log.
+      </p>
+      <p>
+        A public fork should drop counsel&apos;s schedule on this slug. Keep patents and licenses on their own page
+        — do not fold them into the cap table.
+      </p>
+    </ArticlePage>
+  );
+}
+
 export function InternalNotesBody() {
   return (
     <ArticlePage

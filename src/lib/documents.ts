@@ -39,6 +39,7 @@ export const CATEGORY_ORDER = [
   "Financials",
   "Product",
   "Go-to-market",
+  "Security",
   "Legal",
 ] as const;
 
@@ -137,6 +138,17 @@ export const DOCUMENTS: Document[] = [
     distribution: "primary",
   },
   {
+    name: "Security and compliance",
+    slug: "security-compliance",
+    type: "article",
+    description: "Data residency, access, attestation status, and what is still on request.",
+    category: "Security",
+    fileUrl: "/docs/security-compliance",
+    requireNda: false,
+    version: 1,
+    distribution: "primary",
+  },
+  {
     name: "Cap table",
     slug: "cap-table",
     type: "article",
@@ -145,6 +157,17 @@ export const DOCUMENTS: Document[] = [
     fileUrl: "/docs/cap-table",
     requireNda: true,
     version: 2,
+    distribution: "primary",
+  },
+  {
+    name: "Intellectual property",
+    slug: "intellectual-property",
+    type: "article",
+    description: "Patents, inbound licenses, and open source. NDA required. No application numbers on this page.",
+    category: "Legal",
+    fileUrl: "/docs/intellectual-property",
+    requireNda: true,
+    version: 1,
     distribution: "primary",
   },
   {

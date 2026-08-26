@@ -17,10 +17,13 @@ describe("getDocumentNdaAccess", () => {
     delete process.env.NEXT_PUBLIC_SUPABASE_URL;
     delete process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     const capTable = getDocumentBySlug("cap-table");
+    const ip = getDocumentBySlug("intellectual-property");
     const deck = getDocumentBySlug("pitch-deck");
     expect(capTable).toBeDefined();
+    expect(ip).toBeDefined();
     expect(deck).toBeDefined();
     expect(await getDocumentNdaAccess(capTable!)).toBe("not_required");
+    expect(await getDocumentNdaAccess(ip!)).toBe("not_required");
     expect(await getDocumentNdaAccess(deck!)).toBe("not_required");
   });
 });

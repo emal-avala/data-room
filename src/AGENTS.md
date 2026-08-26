@@ -12,7 +12,7 @@ Next.js App Router. Tailwind v4. Bun.
 | `app/api/analytics/` | Identity from session, not the body |
 | `app/api/docs/` | Stamped HTML/PDF |
 | `config/site.ts` | Company name / domain / accent |
-| `lib/documents.ts` | Registry |
+| `lib/documents.ts` | Registry. Security and IP are their own slugs — do not fold them into architecture or the cap table |
 | `lib/dataroom-variants.ts` | **Server-only** room allowlists |
 | `lib/next-path.ts` | Same-origin `next=` |
 | `lib/auth-demo.ts` | Mock `/login` copy + `demo@example.com` when Supabase is missing |

@@ -58,7 +58,9 @@ CROSS JOIN (
         ('competitive-landscape', 60),
         ('technical-architecture', 70),
         ('case-studies', 80),
-        ('cap-table', 90)
+        ('cap-table', 90),
+        ('security-compliance', 100),
+        ('intellectual-property', 110)
 ) AS extra(slug, ord)
 WHERE dataroom_variants.slug = 'full';
 
@@ -71,4 +73,6 @@ INSERT INTO tracked_documents (title, slug, type, settings) VALUES
     ('Competitive landscape', 'competitive-landscape', 'other', '{"require_nda": false}'::jsonb),
     ('Technical architecture', 'technical-architecture', 'other', '{"require_nda": false}'::jsonb),
     ('Site notes', 'case-studies', 'other', '{"require_nda": false}'::jsonb),
-    ('Cap table', 'cap-table', 'other', '{"require_nda": true}'::jsonb);
+    ('Security and compliance', 'security-compliance', 'other', '{"require_nda": false}'::jsonb),
+    ('Cap table', 'cap-table', 'other', '{"require_nda": true}'::jsonb),
+    ('Intellectual property', 'intellectual-property', 'other', '{"require_nda": true}'::jsonb);

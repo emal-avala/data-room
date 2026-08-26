@@ -67,6 +67,8 @@ export const FULL_ONLY_DOCUMENTS = [
   "competitive-landscape",
   "technical-architecture",
   "case-studies",
+  "security-compliance",
+  "intellectual-property",
 ] as const;
 
 /**
