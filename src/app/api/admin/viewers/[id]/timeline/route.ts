@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import { getAdminSupabase } from "../../../_shared";
+import { getDemoViewerTimeline } from "@/lib/analytics/demo-data";
+import { getAdminSupabase, jsonDemo } from "../../../_shared";
 
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const { supabase, error } = await getAdminSupabase();
+  const { supabase, demo, error } = await getAdminSupabase();
   if (error) return error;
   const { id } = await params;
+  if (demo) return jsonDemo({ events: getDemoViewerTimeline(id) });
   const { data } = await supabase
     .from("site_events")
     .select("id, type, path, created_at")

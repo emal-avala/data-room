@@ -1,17 +1,20 @@
 import { NextResponse } from "next/server";
-import { getAdminSupabase } from "../_shared";
+import { getDemoTrackedDocuments } from "@/lib/analytics/demo-data";
 import { DOCUMENTS } from "@/lib/documents";
+import { getAdminSupabase, jsonDemo } from "../_shared";
 
 export async function GET() {
-  const { supabase, error } = await getAdminSupabase();
+  const { supabase, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ documents: getDemoTrackedDocuments() });
   const { data } = await supabase.from("tracked_documents").select("*");
   return NextResponse.json({ documents: data ?? [] });
 }
 
 export async function POST() {
-  const { supabase, error } = await getAdminSupabase();
+  const { supabase, demo, error } = await getAdminSupabase();
   if (error) return error;
+  if (demo) return jsonDemo({ ok: true, synced: DOCUMENTS.length });
   for (const doc of DOCUMENTS) {
     await supabase.from("tracked_documents").upsert(
       {
